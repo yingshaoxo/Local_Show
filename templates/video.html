@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Local Show</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+      .container{
+       text-align: center
+     }
+      .center{
+       text-align: center;
+       margin-top: 30%;
+       margin-bottom: 50%;
+       margin-left: auto;
+       margin-right: auto;
+     }
+    </style>
+
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="list-group center">
+      {% for item in items %}
+        <a id="{{ item | replace(common_path, '') }}" class="list-group-item list-group-item-action list-group-item-{{ colors | random() }}">{{ item | replace(common_path, '') }}</a>
+      {% endfor %}
+      </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script>
+    function do_it() {
+        var video = document.getElementsByTagName("video");
+        if (video[0]) {
+            video[0].remove();
+        }
+
+	var video_url = "../files/{{ common_path }}/" + this.id
+	this.outerHTML+= '<video src="' + video_url + '" type="video/mp4" controls></video>';
+
+        window.location.hash = "#" + this.id;
+    }
+
+    anchors = document.getElementsByClassName("list-group-item");
+
+    for (var i = 0; i < anchors.length; i++) {  
+        anchors[i].addEventListener('click', do_it);
+    };
+    </script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../static/assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../static/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+  </body>
+</html>
