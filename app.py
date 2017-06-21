@@ -11,11 +11,12 @@ pprint(LOCAL_PATH)
 
 
 all_files = []
-supposed_files = {'video': {'suffix':['mkv', 'mp4', 'avi']}, 'music': {'suffix': ['mp3']}}
+global supposed_files
+supposed_files = {'video': {'suffix':['mkv', 'mp4', 'flv', 'avi']}, 'music': {'suffix': ['mp3']}}
 for root, dirs, files in os.walk(LOCAL_PATH):
     for name in files:
         all_files.append(os.path.join(root, name).replace('\\', '/'))
-all_files = [url.replace(LOCAL_PATH + '/', '') for url in all_files] # get rid of base_url
+all_files = [url.replace(LOCAL_PATH, '').strip('/') for url in all_files] # get rid of base_url
 for category in supposed_files:
     supposed_files[category].update({'urls': sorted([name for name in all_files if name[-4:-3] == '.' and name[-3:] in supposed_files[category]['suffix']])})
 #for category in supposed_files:
@@ -31,11 +32,19 @@ def index():
 def video():
     items = supposed_files['video']['urls']
     common_path = os.path.commonpath(items) + '/'
+    if common_path == '/':
+        common_path = ''
+    #print('common_path: ', common_path)
     return render_template('video.html', items=items, common_path=common_path, colors=['normal', 'success', 'info', 'warning', 'danger'])
 
 @app.route("/music")
 def music():
-    return 'Hello, world.'
+    items = supposed_files['music']['urls']
+    common_path = os.path.commonpath(items) + '/'
+    if common_path == '/':
+        common_path = ''
+    #print('common_path: ', common_path)
+    return render_template('music.html', items=items, common_path=common_path, colors=['normal', 'success', 'info', 'warning', 'danger'])
 
 @app.route('/files/<path:filename>')
 def static_files(filename):

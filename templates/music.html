@@ -55,13 +55,13 @@
 
     <script>
     function do_it() {
-        var video = document.getElementsByTagName("video");
-        if (video[0]) {
-            video[0].remove();
+        var audio = document.getElementsByTagName("audio");
+        if (audio[0]) {
+            audio[0].remove();
         };
 
-	var video_url = "../files/{{ common_path }}" + this.id;
-	this.outerHTML+= '<video src="' + video_url + '" type="video/mp4" controls autoplay></video>';
+	var audio_url = "../files/{{ common_path }}" + this.id;
+	this.outerHTML+= '<center><audio src="' + audio_url + '" type="audio/mpeg" controls autoplay></audio></center>';
 
         window.location.hash = this.id;
     };
