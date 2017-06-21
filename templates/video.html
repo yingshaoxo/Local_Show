@@ -50,7 +50,9 @@
     <script>
     var url = window.location.href;
     var hash = url.substring(url.indexOf("#") + 1);
-    window.location.hash = hash;
+    if (url != hash) {
+        window.location.hash = hash;
+    };
     </script>
 
     <script>
@@ -63,14 +65,19 @@
 	var video_url = "../files/{{ common_path }}" + this.id;
 	this.outerHTML+= '<video src="' + video_url + '" type="video/mp4" controls autoplay></video>';
 
+        bind_all() // Every time you change non-div section, your binding will become useless. So bind it again.
         window.location.hash = this.id;
     };
     
-    anchors = document.getElementsByClassName("list-group-item");
+    function bind_all() {
+        anchors = document.getElementsByClassName("list-group-item");
 
-    for (var i = 0; i < anchors.length; i++) {  
-        anchors[i].addEventListener('click', do_it);
+        for (var i = 0; i < anchors.length; i++) {  
+            anchors[i].addEventListener('click', do_it);
+        };
     };
+
+    bind_all(); // You must bind click event to all the items.
     </script>
 
   </body>
