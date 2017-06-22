@@ -9,7 +9,6 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../static/DPlayer/DPlayer.min.css">
 
     <style>
       .container{
@@ -47,7 +46,6 @@
     <script src="../static/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../static/assets/js/ie10-viewport-bug-workaround.js"></script>
-    <script src="../static/DPlayer/DPlayer.min.js"></script>
 
     <script>
     function getCookie(cname) {
@@ -84,28 +82,15 @@
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
 
-    function add_player(video_url) {
-        var dp = new DPlayer({
-	    element: document.getElementById("my_player"),
-	    autoplay: true,
-	    loop: false,
-	    video: {
-		url: video_url 	    
-	    }
-	});
-    };
-
     function do_it() {
-        var my_div = document.getElementById("my_player");
-        if (my_div) {
-            my_div.remove();
+        var video = document.getElementsByTagName("video");
+        if (video[0]) {
+            video[0].remove();
         };
 
-	this.outerHTML+= '<div id="my_player"></div>';
-	if (document.getElementById("my_player")) {
-	    add_player("../files/{{ common_path }}" + this.id);
-	    setCookie("video_hash", this.id, 60); //location saving
-	};
+	var video_url = "../files/{{ common_path }}" + this.id;
+	this.outerHTML+= '<video src="' + video_url + '" type="video/mp4" controls></video>';
+	setCookie("video_hash", this.id, 60); //location saving
 
         bind_all() // Every time you change non-div section, your binding will become useless. So bind it again.
         window.location.hash = this.id;

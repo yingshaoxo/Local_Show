@@ -48,14 +48,40 @@
     <script src="../static/assets/js/ie10-viewport-bug-workaround.js"></script>
 
     <script>
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+
     var url = window.location.href;
     var hash = url.substring(url.indexOf("#") + 1);
     if (url != hash) {
         window.location.hash = hash;
+    }
+    else {
+	window.location.hash = getCookie("music_hash"); //location reading
     };
     </script>
 
     <script>
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+
     function do_it() {
         var audio = document.getElementsByTagName("audio");
         if (audio[0]) {
@@ -64,6 +90,7 @@
 
 	var audio_url = "../files/{{ common_path }}" + this.id;
 	this.outerHTML+= '<center><audio src="' + audio_url + '" type="audio/mpeg" controls autoplay></audio></center>';
+        setCookie("music_hash", this.id, 60); //location saving
         
         bind_all() // Every time you change non-div section, your binding will become useless. So bind it again.
         window.location.hash = this.id;
