@@ -89,7 +89,7 @@
         };
 
 	var video_url = "../files/{{ common_path }}" + this.id;
-	this.outerHTML+= '<video src="' + video_url + '" type="video/mp4" controls></video>';
+	this.outerHTML+= '<video src="' + video_url + '" type="video/mp4" controls autoplay></video>';
 	setCookie("video_hash", this.id, 60); //location saving
 
         bind_all() // Every time you change non-div section, your binding will become useless. So bind it again.

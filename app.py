@@ -1,9 +1,9 @@
-from flask import Flask, render_template, send_from_directory, session
+from flask import Flask, render_template, redirect, send_from_directory, session
 from pprint import pprint
 import os
 
 
-LOCAL_PATH = "/home/yingshaoxo/Downloads" 
+LOCAL_PATH = "/home/yingshaoxo/Downloads/Bleach/done" 
 if os.path.isdir(LOCAL_PATH) == False:
     print("Local path doen't exists!")
     exit()
@@ -31,6 +31,8 @@ def index():
 @app.route("/video")
 def video():
     items = supposed_files['video']['urls']
+    if len(items) == 0:
+        return redirect('/')
     common_path = os.path.commonpath(items) + '/'
     if common_path == '/':
         common_path = ''
@@ -40,6 +42,8 @@ def video():
 @app.route("/music")
 def music():
     items = supposed_files['music']['urls']
+    if len(items) == 0:
+        return redirect('/')
     common_path = os.path.commonpath(items) + '/'
     if common_path == '/':
         common_path = ''
@@ -52,5 +56,5 @@ def static_files(filename):
 
 if __name__ == '__main__':
     app.secret_key = 'some random string'
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
 
