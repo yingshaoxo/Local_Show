@@ -87,8 +87,9 @@
     function add_player(video_url) {
         var dp = new DPlayer({
 	    element: document.getElementById("my_player"),
-	    autoplay: true,
+	    autoplay: false,
 	    loop: false,
+        video.type = 'auto'
 	    video: {
 		url: video_url 	    
 	    }
@@ -101,11 +102,17 @@
             my_div.remove();
         };
 
-	this.outerHTML+= '<div id="my_player"></div>';
-	if (document.getElementById("my_player")) {
-	    add_player("../files/{{ common_path }}" + this.id);
-	    setCookie("video_hash", this.id, 60); //location saving
-	};
+        var video_path;
+        video_path = "../files/{{ common_path }}" + this.id;
+
+        var added;
+        added = '<div id="my_player"></div>';
+        //added += '<a href=' + video_path + '>Download</a>';
+        this.outerHTML+= added;
+        if (document.getElementById("my_player")) {
+            add_player(video_path);
+            setCookie("video_hash", this.id, 60); //location saving
+        };
 
         bind_all() // Every time you change non-div section, your binding will become useless. So bind it again.
         window.location.hash = this.id;

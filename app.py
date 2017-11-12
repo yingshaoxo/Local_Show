@@ -1,9 +1,18 @@
 from flask import Flask, render_template, redirect, send_from_directory, session
 from pprint import pprint
 import os
+import sys
 
 
-LOCAL_PATH = "/home/yingshaoxo/Downloads/Bleach/done" 
+LOCAL_PATH = "/home" 
+
+if sys.argv[1:] == []:
+    print('usage:', 'python3 app.py your_folder_path')
+else:
+    giving_path = sys.argv[1:][0]
+    if os.path.isdir(giving_path):
+        LOCAL_PATH = giving_path
+    
 if os.path.isdir(LOCAL_PATH) == False:
     print("Local path doen't exists!")
     exit()

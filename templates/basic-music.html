@@ -33,11 +33,6 @@
       {% for item in items %}
         <a id="{{ item | replace(common_path, '') }}" class="list-group-item list-group-item-action list-group-item-{{ colors | random() }}">{{ item | replace(common_path, '') }}</a>
       {% endfor %}
-
-      <br><br>
-      <br><br>
-      <div id="player1" class="aplayer"></div>
-
       </div>
 
     </div>
@@ -111,32 +106,6 @@
     };
 
     bind_all(); // You must bind click event to all the items.
-    </script>
-
-
-    <script src="../static/APlayer/APlayer.min.js"></script>
-    <script>
-        var ap1 = new APlayer({
-            element: document.getElementById('player1'),
-            narrow: false,
-            autoplay: false,
-            showlrc: false,
-            mutex: true,
-            preload: 'none',
-            theme: '#ff6600',
-            mode: 'random',
-            music: [
-    {% for item in items %} 
-                 {
-                    title: '{{ item | replace(common_path, '') }}',
-            author: '',
-                    url: '../files/' + '{{ item }}',
-                    pic: ''
-                },
-    {% endfor %}
-             ]
-        });
-       ap1.volume(0.3); 
     </script>
 
   </body>
