@@ -8,4 +8,4 @@ Music and Videos.
 flask
 
 ### Usage
-`python3 app.py /home/Music/` or `python3 app.py your_files_folder_path`
+`python3 app.py /home/Music/` or `python3 app.py your_folder_path`
