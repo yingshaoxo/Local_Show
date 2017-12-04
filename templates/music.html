@@ -16,8 +16,8 @@
      }
       .center{
        text-align: center;
-       margin-top: 30%;
-       margin-bottom: 50%;
+       margin-top: 25%;
+       margin-bottom: 25%;
        margin-left: auto;
        margin-right: auto;
      }
@@ -29,15 +29,14 @@
 
     <div class="container">
 
+      <div id="player1" class="aplayer"></div>
+
+      <br><br>
+
       <div class="list-group center">
       {% for item in items %}
         <a id="{{ item | replace(common_path, '') }}" class="list-group-item list-group-item-action list-group-item-{{ colors | random() }}">{{ item | replace(common_path, '') }}</a>
       {% endfor %}
-
-      <br><br>
-      <br><br>
-      <div id="player1" class="aplayer"></div>
-
       </div>
 
     </div>
@@ -120,18 +119,18 @@
             element: document.getElementById('player1'),
             narrow: false,
             autoplay: false,
-            showlrc: false,
+            showlrc: 0,
             mutex: true,
             preload: 'none',
             theme: '#ff6600',
             mode: 'random',
+            listmaxheight: '230px',
             music: [
     {% for item in items %} 
                  {
                     title: '{{ item | replace(common_path, '') }}',
             author: '',
                     url: '../files/' + '{{ item }}',
-                    pic: ''
                 },
     {% endfor %}
              ]

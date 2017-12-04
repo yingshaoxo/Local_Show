@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, send_from_directory, session
 from pprint import pprint
 import os
 import sys
+import random
 
 
 LOCAL_PATH = "/home" 
@@ -58,6 +59,17 @@ def music():
         common_path = ''
     #print('common_path: ', common_path)
     return render_template('music.html', items=items, common_path=common_path, colors=['normal', 'success', 'info', 'warning', 'danger'])
+
+@app.route('/music/demo.mp3')
+def random_music():
+    items = supposed_files['music']['urls']
+    length = len(items)
+    if length == 0:
+        return ''
+    common_path = os.path.commonpath(items) + '/'
+    if common_path == '/':
+        common_path = ''
+    return send_from_directory(LOCAL_PATH, items[random.randrange(0, length)])
 
 @app.route('/files/<path:filename>')
 def static_files(filename):
