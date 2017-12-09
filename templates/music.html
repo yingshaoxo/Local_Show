@@ -128,7 +128,7 @@
                  {
                     title: '{{ item | replace(common_path, '') }}',
             author: '',
-                    url: '../files/' + '{{ item }}',
+                    url: '../files/' + unescape(`{{ item }}`.replace("&#39;", "'").replace("&amp;", "&")),
                 },
     {% endfor %}
              ]
