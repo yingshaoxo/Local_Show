@@ -47,6 +47,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="../static/js/jquery.min.js"></script>
     <script src="../static/js/tether.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
 
     <script>
@@ -90,7 +91,7 @@
             audio[0].remove();
         };
 
-        var audio_url = "../files/{{ common_path }}" + this.id;
+        var audio_url = "../files/{{ common_path }}";
         this.outerHTML+= '<center><audio src="' + audio_url + '" type="audio/mpeg" controls autoplay></audio></center>';
 
         setCookie("music_hash", this.id, 60); //location saving
