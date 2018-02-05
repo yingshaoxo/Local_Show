@@ -16,8 +16,8 @@
      }
       .center{
        text-align: center;
-       margin-top: 30%;
-       margin-bottom: 50%;
+       margin-top: 25%;
+       margin-bottom: 25%;
        margin-left: auto;
        margin-right: auto;
      }
@@ -27,9 +27,9 @@
 
   <body>
 
-    <div class="container">
+    <div class="container center">
 
-      <div class="list-group center">
+      <div class="list-group">
       {% for item in items %}
         <a id="{{ item | replace(common_path, '') }}" class="list-group-item list-group-item-action list-group-item-{{ colors | random() }}">{{ item | replace(common_path, '') }}</a>
       {% endfor %}
@@ -42,6 +42,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="../static/js/jquery.min.js"></script>
     <script src="../static/js/tether.min.js"></script>
+    <script src="../static/js/popper.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
 
     <script>
@@ -67,7 +68,7 @@
         window.location.hash = hash;
     }
     else {
-	window.location.hash = getCookie("music_hash"); //location reading
+	window.location.hash = getCookie("file_hash"); //location reading
     };
     </script>
 
@@ -80,15 +81,15 @@
     }
 
     function do_it() {
-        var audio = document.getElementsByTagName("audio");
-        if (audio[0]) {
-            audio[0].remove();
+        var file = document.getElementsByTagName("file");
+        if (file[0]) {
+            file[0].remove();
         };
 
-        var audio_url = "../files/{{ common_path }}" + this.id;
-        this.outerHTML+= '<center><audio src="' + audio_url + '" type="audio/mpeg" controls autoplay></audio></center>';
+        var file_url = "../files/{{ common_path }}" + this.id;
+        window.open(file_url)
 
-        setCookie("music_hash", this.id, 60); //location saving
+        setCookie("file_hash", this.id, 60); //location saving
         
         bind_all() // Every time you change non-div section, your binding will become useless. So bind it again.
         window.location.hash = this.id;

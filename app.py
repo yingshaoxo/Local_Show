@@ -13,10 +13,15 @@ else:
     giving_path = sys.argv[1:][0]
     if os.path.isdir(giving_path):
         LOCAL_PATH = giving_path
+    else:
+        print(giving_path)
+        print('The path you were giving does not exist!')
+        exit()
     
 if os.path.isdir(LOCAL_PATH) == False:
     print("Local path doen't exists!")
     exit()
+
 pprint(LOCAL_PATH)
 
 
@@ -29,6 +34,8 @@ for root, dirs, files in os.walk(LOCAL_PATH):
 all_files = [url.replace(LOCAL_PATH, '').strip('/') for url in all_files] # get rid of base_url
 for category in supposed_files:
     supposed_files[category].update({'urls': sorted([name for name in all_files if name[-4:-3] == '.' and name[-3:] in supposed_files[category]['suffix']])})
+
+supposed_files.update({'file':{'urls':all_files}})
 #for category in supposed_files:
 #    pprint(supposed_files[category]['urls'])
 
@@ -59,6 +66,17 @@ def music():
         common_path = ''
     #print('common_path: ', common_path)
     return render_template('music.html', items=items, common_path=common_path, colors=['normal', 'success', 'info', 'warning', 'danger'])
+
+@app.route("/file")
+def file():
+    items = supposed_files['file']['urls']
+    if len(items) == 0:
+        return redirect('/')
+    common_path = os.path.commonpath(items) + '/'
+    if common_path == '/':
+        common_path = ''
+    #print('common_path: ', common_path)
+    return render_template('file.html', items=items, common_path=common_path, colors=['normal', 'success', 'info', 'warning', 'danger'])
 
 @app.route('/music/demo.mp3')
 def random_music():
