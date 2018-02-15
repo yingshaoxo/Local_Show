@@ -5,7 +5,8 @@ run() {
     sudo apt-get install -y python3-pip
     sudo pip3 install --no-cache-dir -r requirements.txt
 
-    nohup python3.6 app/app.py &
+    #nohup python3.6 app/app.py &
+    gunicorn -b 0.0.0.0:2018 --workers=2 app.app:app &
 }
 
 docker_run() {
@@ -25,6 +26,7 @@ push() {
 
 clear() {
     rm nohup.out 
+    rm -fr __pycache__
     rm -fr app/__pycache__
 }
 
