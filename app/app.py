@@ -11,6 +11,9 @@ if sys.argv[1:] == []:
     print('usage:', 'python3 app.py your_folder_path')
 else:
     giving_path = sys.argv[-1:][0]
+    if giving_paht == "&":
+        giving_path = sys.argv[-2:][0]
+
     if os.path.isdir(giving_path):
         LOCAL_PATH = giving_path
     else:
