@@ -6,7 +6,8 @@ run() {
     sudo pip3 install --no-cache-dir -r requirements.txt
 
     #nohup python3.6 app/app.py &
-    gunicorn -b 0.0.0.0:2018 --workers=2 app.app:app &
+    #gunicorn -b 0.0.0.0:2018 --workers=2 app.app:app &
+    python3.6 app/app.py &
 }
 
 docker_run() {
