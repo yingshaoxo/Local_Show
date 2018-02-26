@@ -12,7 +12,7 @@ run() {
 }
 
 docker_run() {
-    python3.6 /usr/src/webchat/app/app.py
+    python3.6 /usr/src/Local_Show/app/app.py /usr/src/Local_Show/files
 }
 
 pull() {
@@ -55,3 +55,22 @@ push
 clear"
 
 fi
+
+
+
+### way to fix docker 
+
+# sudo docker logs local_show
+
+# sudo docker run --name local_show -it yingshaoxo/local_show:1.0 /bin/bash
+
+# sudo docker attach local_show
+# sudo docker exec -i -t local_show /bin/bash
+
+# sudo docker commit local_show yingshaoxo/local_show:1.0
+
+
+
+### docker building
+
+# sudo docker build -t yingshaoxo/local_show:1.0 .

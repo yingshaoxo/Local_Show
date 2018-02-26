@@ -50,10 +50,11 @@ def prepare():
     #    pprint(supposed_files[category]['urls'])
 
 def render_template(html_name, **args):
-    with open(os.path.join(os.path.dirname(__file__), 'templates', html_name), 'r') as f:
+    with open(os.path.join(os.path.dirname(__file__), 'templates', html_name), 'r', encoding="utf-8", errors='surrogateescape') as f:
         html_text = f.read()
     template = Template(html_text)
-    return response.html(template.render(args))
+    template_text = template.render(args)
+    return response.html(template_text)
     
 
 global supposed_files
