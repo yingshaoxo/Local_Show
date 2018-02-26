@@ -70,7 +70,8 @@ async def index(request):
 async def video(request):
     items = supposed_files['video']['urls']
     if len(items) == 0:
-        return redirect('/')
+        url = app.url_for('index')
+        return response.redirect(url)
     common_path = os.path.commonpath(items) + '/'
     if common_path == '/':
         common_path = ''
@@ -81,7 +82,8 @@ async def video(request):
 async def music(request):
     items = supposed_files['music']['urls']
     if len(items) == 0:
-        return redirect('/')
+        url = app.url_for('index')
+        return response.redirect(url)
     common_path = os.path.commonpath(items) + '/'
     if common_path == '/':
         common_path = ''
@@ -92,7 +94,8 @@ async def music(request):
 async def file(request):
     items = supposed_files['file']['urls']
     if len(items) == 0:
-        return redirect('/')
+        url = app.url_for('index')
+        return response.redirect(url)
     common_path = os.path.commonpath(items) + '/'
     if common_path == '/':
         common_path = ''
@@ -104,7 +107,7 @@ async def random_music(request):
     items = supposed_files['music']['urls']
     length = len(items)
     if length == 0:
-        return ''
+        return response.text("")
     common_path = os.path.commonpath(items) + '/'
     if common_path == '/':
         common_path = ''
