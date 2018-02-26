@@ -1,5 +1,7 @@
 FROM ubuntu:17.10
 
+ENV LANG C.UTF-8
+
 RUN apt-get update
 RUN apt-get install -y python3
 RUN apt-get install -y python3-pip
@@ -15,7 +17,5 @@ RUN chmod +x /usr/src/Local_Show/tool.sh
 RUN mkdir -p /usr/src/Local_Show/files
 
 EXPOSE 2018 
-
-ENV LANG C.UTF-8
 
 CMD ["bash", "/usr/src/Local_Show/tool.sh", "docker_run"]
