@@ -98,12 +98,18 @@
         if (my_div) {
             my_div.remove();
         };
+        var my_link = document.getElementById("my_link");
+        if (my_link) {
+            my_link.remove();
+        };
 
         var video_path;
         video_path = "../files/{{ common_path }}" + this.id;
+        video_path = decodeURI(video_path);
 
         var added;
-        added = '<div id="my_player"></div>';
+        added = `<div id="my_player"></div>
+<a id="my_link" href='${video_path}'>${video_path}</a>`;
         //added += '<a href=' + video_path + '>Download</a>';
         this.outerHTML+= added;
         if (document.getElementById("my_player")) {

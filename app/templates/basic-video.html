@@ -87,6 +87,7 @@
         };
 
 	var video_url = "../files/{{ common_path }}" + this.id;
+    video_url = decodeURI(video_url);
 	this.outerHTML+= '<video src="' + video_url + '" type="video/mp4" controls autoplay></video>';
 	setCookie("video_hash", this.id, 60); //location saving
 

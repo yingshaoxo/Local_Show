@@ -1,1 +1,1 @@
-python3 app/app.py /media/yingshaoxo/DATA/Music &
+python3 app/app.py ~/Music

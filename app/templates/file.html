@@ -87,6 +87,7 @@
         };
 
         var file_url = "../files/{{ common_path }}" + this.id;
+        file_url = decodeURI(file_url);
         window.open(file_url)
 
         setCookie("file_hash", this.id, 60); //location saving

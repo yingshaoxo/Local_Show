@@ -23,6 +23,7 @@ if os.path.isdir(LOCAL_PATH) == False:
     print("Local path doen't exists!")
     exit()
 
+LOCAL_PATH = os.path.abspath(LOCAL_PATH)
 pprint(LOCAL_PATH)
 
 
@@ -103,6 +104,11 @@ async def file(request):
     #print('common_path: ', common_path)
     return render_template('file.html', items=items, common_path=common_path, colors=['normal', 'success', 'info', 'warning', 'danger'])
 
+"""
+@app.route("/files/<file_name>")
+async def files(request, file_name):
+"""
+
 @app.route('/music/demo.mp3')
 async def random_music(request):
     items = supposed_files['music']['urls']
@@ -116,4 +122,4 @@ async def random_music(request):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=2018)
+    app.run(host='0.0.0.0', port=2018, workers=4)
