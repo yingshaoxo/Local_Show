@@ -6,6 +6,12 @@ import os
 import sys
 import random
 
+
+# 0. we need current forder path
+CURRENT_PATH = os.path.dirname(__file__)
+
+
+# 1. take care of paramater you're giving
 LOCAL_PATH = "/home"
 
 if sys.argv[1:] == []:
@@ -30,19 +36,22 @@ LOCAL_PATH = os.path.abspath(LOCAL_PATH)
 pprint(LOCAL_PATH)
 
 
+# 2. run golang for static serving
+go_serve_path = os.path.abspath(os.path.join(CURRENT_PATH, 'go_serve'))
+if t.is_running("go_serve"):
+    t.run_command("pkill go_serve")
+t.run_program('{go_serve_path} -p "8100" -d "{target_folder}"'.format(
+    go_serve_path=go_serve_path, target_folder=LOCAL_PATH))
+
+
+# 3. import sanic and start develop 
 from sanic import Sanic, response
 from jinja2 import Template
 
 app = Sanic()
 app.static('/static', os.path.join(os.path.dirname(__file__), 'static'))
-#app.static('/files', LOCAL_PATH)
+# app.static('/files', LOCAL_PATH)
 
-
-go_serve_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'go_serve'))
-if t.is_running("go_serve"):
-    t.run_command("pkill go_serve")
-t.run_program('{go_serve_path} -p "8100" -d "{target_folder}"'.format(
-    go_serve_path=go_serve_path, target_folder=LOCAL_PATH))
 
 @app.route("/files/<name:path>")
 async def files(request, name):
@@ -96,7 +105,7 @@ async def video(request):
     common_path = os.path.commonpath(items) + '/'
     if common_path == '/':
         common_path = ''
-    #print('common_path: ', common_path)
+    # print('common_path: ', common_path)
     return render_template('video.html', items=items, common_path=common_path, colors=['normal', 'success', 'info', 'warning', 'danger'])
 
 
@@ -109,7 +118,7 @@ async def music(request):
     common_path = os.path.commonpath(items) + '/'
     if common_path == '/':
         common_path = ''
-    #print('common_path: ', common_path)
+    # print('common_path: ', common_path)
     return render_template('music.html', items=items, common_path=common_path, colors=['normal', 'success', 'info', 'warning', 'danger'])
 
 
@@ -122,8 +131,27 @@ async def file(request):
     common_path = os.path.commonpath(items) + '/'
     if common_path == '/':
         common_path = ''
-    #print('common_path: ', common_path)
+    # print('common_path: ', common_path)
     return render_template('file.html', items=items, common_path=common_path, colors=['normal', 'success', 'info', 'warning', 'danger'])
+
+
+@app.route("/upload", methods=['OPTIONS', 'GET', 'POST'])
+async def upload(request):
+    if request.method == "GET":
+        return render_template('upload.html')
+
+    elif request.method == "POST":
+        path = os.path.join(LOCAL_PATH, 'upload')
+        if not os.path.exists(path):
+            os.makedirs(path)
+
+        for file_ in request.files['file']:
+            file_path = os.path.join(path, file_.name)
+            f = open(file_path, "wb")
+            f.write(file_.body)
+            f.close()
+
+        return response.json(True)
 
 
 @app.route('/music/demo.mp3')
