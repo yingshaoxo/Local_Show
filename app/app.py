@@ -38,7 +38,7 @@ app.static('/static', os.path.join(os.path.dirname(__file__), 'static'))
 #app.static('/files', LOCAL_PATH)
 
 
-go_serve_path = os.path.join(os.path.dirname(__file__), 'go_serve')
+go_serve_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'go_serve'))
 if t.is_running("go_serve"):
     t.run_command("pkill go_serve")
 t.run_program('{go_serve_path} -p "8100" -d "{target_folder}"'.format(

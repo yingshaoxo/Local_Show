@@ -21,6 +21,7 @@ pull() {
 }
 
 push() {
+    clear
     git add .
     git commit -m "update"
     git push origin
@@ -28,6 +29,7 @@ push() {
 
 clear() {
     rm nohup.out 
+    rm app/nohup.out
     rm -fr __pycache__
     rm -fr app/__pycache__
 }
