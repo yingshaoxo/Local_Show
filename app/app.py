@@ -93,6 +93,8 @@ prepare()
 async def index(request):
     global prepare
     prepare()
+
+    supposed_files.update({'upload': ''})
     return render_template('index.html', items=supposed_files.keys())
 
 
