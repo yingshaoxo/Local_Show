@@ -91,7 +91,12 @@
             audio[0].remove();
         };
 
-        var audio_url = "../files/{{ common_path }}" + this.id;
+	if ("{{ common_path }}" == (this.id + "/")) {
+		var audio_url = "../files/{{ common_path }}";
+	} else {
+		var audio_url = "../files/{{ common_path }}" + this.id;
+	}
+
         this.outerHTML+= '<center><audio src="' + audio_url + '" type="audio/mpeg" controls autoplay></audio></center>';
         setTimeout(function(){
             document.body.querySelectorAll('audio')[0].volume = 0.3

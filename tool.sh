@@ -1,14 +1,14 @@
 #!/bin/bash
 
 run() {
-    sudo apt-get install -y python3.6
+    sudo apt-get install -y python3
     sudo apt-get install -y python3-pip
-    sudo apt-get install -y python3.6-dev
-    sudo pip3 install --no-cache-dir -r requirements.txt
+    sudo apt-get install -y python3-dev
+    sudo pip3 install -r requirements.txt
 
     #nohup python3.6 app/app.py &
     #gunicorn -b 0.0.0.0:2018 --workers=2 app.app:app &
-    python3.6 app/app.py &
+    python3 app/app.py &
 }
 
 docker_run() {
