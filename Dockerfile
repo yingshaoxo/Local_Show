@@ -1,4 +1,4 @@
-FROM ubuntu:17.10
+FROM ubuntu:18.04
 
 ENV LANG C.UTF-8
 
@@ -12,10 +12,9 @@ RUN pip3 install --no-cache-dir -r /usr/src/Local_Show/requirements.txt
 
 COPY . /usr/src/Local_Show/
 
-RUN chmod +x /usr/src/Local_Show/tool.sh
-
 RUN mkdir -p /usr/src/Local_Show/files
 
 EXPOSE 2018 
+EXPOSE 21
 
-CMD ["bash", "/usr/src/Local_Show/tool.sh", "docker_run"]
+CMD ["python3", "/usr/src/Local_Show/Tools.py", "run_in_docker"]

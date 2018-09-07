@@ -36,6 +36,12 @@ LOCAL_PATH = os.path.abspath(LOCAL_PATH)
 pprint(LOCAL_PATH)
 
 
+# 1.5. run ftp server
+ftp_server_path = os.path.abspath(os.path.join(CURRENT_PATH, 'ftp.py'))
+t.kill('ftp.py')
+t.run_py("{ftp} {folder}".format(ftp=ftp_server_path, folder=LOCAL_PATH))
+
+
 # 2. run golang for static serving
 go_serve_path = os.path.abspath(os.path.join(CURRENT_PATH, 'go_serve'))
 if t.is_running("go_serve"):
