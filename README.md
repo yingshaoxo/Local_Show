@@ -12,3 +12,8 @@ sanic&jinja2 or flask
 
 ### Docker
 `sudo docker run -d -v <your_file_directory>:/usr/src/Local_Show/files -p 2018:2018 --name local_show yingshaoxo/local_show`
+
+### Actully, there's simpler way for the same job
+```
+sudo python3 -m http.server 80
+```
