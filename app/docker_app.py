@@ -62,7 +62,7 @@ app.static('/static', os.path.join(os.path.dirname(__file__), 'static'))
 
 @app.route("/files/<name:path>")
 async def files(request, name):
-    return response.redirect("http://" + request.host.split(':')[0] + ":8100/" + name)
+    return response.redirect("http://" + request.host.split(':')[0] + ":8100/" + urllib.parse.quote(name, safe='~@#$&()*!+=:;,.?/\''))
 
 
 def prepare():

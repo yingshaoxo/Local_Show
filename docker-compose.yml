@@ -16,5 +16,5 @@ services:
       - "2019:2018"
       - "8100:8100"
     volumes:
-      - ./data:/data:rw
+      - ./data:/data/files:rw
     restart: always

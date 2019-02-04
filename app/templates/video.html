@@ -116,8 +116,8 @@
         video_path = "../files/{{ common_path }}" + this.id;
         var intent_video_path;
         intent_video_path = window.location.href.split("#")[0].split("//")[1].split("/")[0] + "/files/{{ common_path }}" + this.id;
-        //video_path = decodeURI(video_path);
-        //intent_video_path = decodeURI(intent_video_path);
+        //video_path = encodeURI(video_path);
+        //intent_video_path = encodeURI(intent_video_path);
 
         var added;
         added = `
