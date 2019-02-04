@@ -3,7 +3,9 @@ Show your local media files through webpage based on Python3.
 
 ### Fetures
 Music and Videos in Web
+
 Support invoking `MX Player` in Android
+
 Support directly download from server
 
 ### Requirements
@@ -14,10 +16,14 @@ sanic&jinja2 or flask
 
 ### Docker Compose
 start: `sudo docker-compose up -d`
+
 stop: `sudo docker-compose down`
+___
 
 Open `http://127.0.0.1:8000`to download medium.
+
 Open `http://127.0.0.1:8000/files`to manage files (username: `admin`, password: `admin`).
+
 Open `http://127.0.0.1:2019`to visit medium.
 
 ### Docker
