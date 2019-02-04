@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  aria2-ui:
+    image: wahyd4/aria2-ui
+    ports:
+      - "8000:80"
+      - "6800:6800"
+      - "443:443"
+    volumes:
+      - ./data:/data:rw
+    restart: always
+  local-show:
+    image: yingshaoxo/local_show
+    ports:
+      - "2019:2018"
+      - "8100:8100"
+    volumes:
+      - ./data:/data:rw
+    restart: always

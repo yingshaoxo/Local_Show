@@ -22,6 +22,11 @@
        margin-left: auto;
        margin-right: auto;
      }
+      .item{
+       text-align: center;
+       height: auto;
+       word-wrap: break-word;
+      }
     </style>
 
   </head>
@@ -32,7 +37,7 @@
 
       <div class="list-group center">
       {% for item in items %}
-        <a id="{{ item | replace(common_path, '') }}" class="list-group-item list-group-item-action list-group-item-{{ colors | random() }}">{{ item | replace(common_path, '') }}</a>
+        <a id="{{ item | replace(common_path, '') }}" class="list-group-item list-group-item-action list-group-item-{{ colors | random() }} item">{{ item | replace(common_path, '') }}</a>
       {% endfor %}
       </div>
 
@@ -98,18 +103,28 @@
         if (my_div) {
             my_div.remove();
         };
-        var my_link = document.getElementById("my_link");
+        var my_link = document.getElementById("my_link1");
+        if (my_link) {
+            my_link.remove();
+        };
+        var my_link = document.getElementById("my_link2");
         if (my_link) {
             my_link.remove();
         };
 
         var video_path;
         video_path = "../files/{{ common_path }}" + this.id;
-        video_path = decodeURI(video_path);
+        var intent_video_path;
+        intent_video_path = window.location.href.split("#")[0].split("//")[1].split("/")[0] + "/files/{{ common_path }}" + this.id;
+        //video_path = decodeURI(video_path);
+        //intent_video_path = decodeURI(intent_video_path);
 
         var added;
-        added = `<div id="my_player"></div>
-<a id="my_link" href='${video_path}'>${video_path}</a>`;
+        added = `
+<div id="my_player"></div>
+<a id="my_link1" href='intent://${intent_video_path}#Intent;action=android.intent.action.VIEW;scheme=http;type=video/mp4;end'>MX Player</a>
+<a id="my_link2" href='${video_path}'>Download</a>
+            `;
         //added += '<a href=' + video_path + '>Download</a>';
         this.outerHTML+= added;
         if (document.getElementById("my_player")) {
