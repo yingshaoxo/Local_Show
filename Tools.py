@@ -5,7 +5,7 @@ t = Terminal()
 
 class Tools():
     def run_in_docker(self):
-        t.run('python3 /usr/src/Local_Show/app/app.py /usr/src/Local_Show/files')
+        t.run('python3 /data/app/app.py /data/files')
 
     def push(self, comment):
         self.__clear()

@@ -1,4 +1,5 @@
 sanic
 jinja2
 pyftpdlib
+fire
 auto_everything

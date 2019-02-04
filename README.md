@@ -2,7 +2,7 @@
 A local media files showing web app based on Python.
 
 ### Fetures
-Music and Videos.
+Music and Videos in Web. Then show others files at port 21 by FTP protocol.
 
 ### Requirements
 sanic&jinja2 or flask
@@ -11,9 +11,14 @@ sanic&jinja2 or flask
 `python3 app.py /home/Music/` or `python3 app.py your_folder_path`
 
 ### Docker
-`sudo docker run -d -v <your_file_directory>:/usr/src/Local_Show/files -p 2018:2018 --name local_show yingshaoxo/local_show`
+`sudo docker run -d -v <your_file_directory>:/data/files -p 2019:2018 -p 2121:21 -p 8100:8100 --name local_show yingshaoxo/local_show`
 
-### Actully, there's simpler way for the same job
+Open `http://127.0.0.1:2019` or `ftp://127.0.0.1:2121` to see the webpage.
+
+### Build Docker Image
+`sudo docker build -t yingshaoxo/local_show .`
+
+### Actully, there has a simpler way for the same job
 ```
 sudo python3 -m http.server 80
 ```
