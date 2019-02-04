@@ -29,7 +29,7 @@ from pyftpdlib.handlers import FTPHandler
 from pyftpdlib.servers import FTPServer
 
 authorizer = DummyAuthorizer()
-authorizer.add_anonymous(LOCAL_PATH)
+authorizer.add_anonymous(LOCAL_PATH, perm="elradfmw")
 
 handler = FTPHandler
 handler.authorizer = authorizer
