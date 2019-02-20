@@ -18,3 +18,10 @@ services:
     volumes:
       - ./data:/data/files:rw
     restart: always
+  zeronet:
+    image: nofish/zeronet
+    ports:
+      - "26552:26552"
+      - "0.0.0.0:43110:43110"
+    volumes:
+      - ./data/zeronet:/root/data
