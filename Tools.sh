@@ -1,14 +1,12 @@
-#!/bin/bash
-
 hi() {
     echo "hi"
 }
 
 build() {
-    mkdir build
-    rm build/* -fr
-    cd build
-    gox -output="{{.OS}}_{{.Arch}}" -os="linux" -os="windows" ..
+    mkdir bin
+    rm bin/* -fr
+    cd bin
+    gox -output="{{.OS}}_{{.Arch}}" -os="linux" -os="windows" ../src
     cd ..
 }
 
@@ -22,7 +20,7 @@ serve() {
     esac
     echo $architecture
 
-    ./build/linux_$architecture
+    ./bin/linux_$architecture
 }
 
 push() {
