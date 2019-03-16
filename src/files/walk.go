@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 func init() {
@@ -27,11 +28,13 @@ func Get_all_dir_and_files(root string) (map[string][]string, error) {
 	err := filepath.Walk(
 		root,
 		func(path string, info os.FileInfo, err error) error {
-			if info.IsDir() {
-				file_dict[path] = []string{}
-				temp_dir = path
-			} else {
-				file_dict[temp_dir] = append(file_dict[temp_dir], path)
+			if strings.Contains(path, "/.") == false {
+				if info.IsDir() {
+					file_dict[path] = []string{}
+					temp_dir = path
+				} else {
+					file_dict[temp_dir] = append(file_dict[temp_dir], path)
+				}
 			}
 			return nil
 		},
