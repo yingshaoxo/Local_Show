@@ -12,6 +12,9 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 
+import {HOST} from './Const';
+import ResponsiveDialog from './Popup';
+
 const styles = theme => ({
     root: {
         width: '100%',
@@ -22,39 +25,23 @@ const styles = theme => ({
     },
 });
 
-//const API_BASE = 'api/'
-const API_BASE = 'http://127.0.0.1:5000/api/'
+const API_BASE = HOST + 'api/'
 const API_FUNCTION_GET_INFO = 'info/'
 const API_FUNCTION_GET_FILES = 'files/'
 
 class NestedList extends React.Component {
     state = {
         info: {
+            'server_media_root': '',
             'root_folder': ''
         },
         files: {"Folder": ["No file has been found right now"]},
         open_folder: "",
-    };
 
-    handleFolderClick = (key) => {
-        if (this.state.open_folder == key) {
-            this.setState(state => ({ 
-                open_folder: ""
-            }));
-        } else {
-            this.setState(state => ({ 
-                open_folder: key
-            }));
-        }
+        keep_popup_open: false,
+        selected_file_name: 'yingshaoxo',
+        selected_file_path: 'https://yingshaoxo.xyz',
     };
-
-    shouldYouOpen = (key) => {
-        if (key == this.state.open_folder) {
-            return true
-        } else {
-            return false
-        }
-    }
 
     componentDidMount() {
         var url = ""
@@ -102,48 +89,97 @@ class NestedList extends React.Component {
         .catch(error => console.log(error));
     }
 
+    handleFolderClick = (key) => {
+        if (this.state.open_folder == key) {
+            this.setState(state => ({ 
+                open_folder: ""
+            }));
+        } else {
+            this.setState(state => ({ 
+                open_folder: key
+            }));
+        }
+    }
+
+    shouldYouOpenFolder = (key) => {
+        if (key == this.state.open_folder) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    handleFileClick = (name, path) => {
+        this.setState(state => ({
+            keep_popup_open: true,
+            selected_file_name: name,
+            selected_file_path: path,
+        }))
+    }
+
+    handlePopupClose = () => {
+        this.setState(state => ({
+            keep_popup_open: false 
+        }))
+    }
+
     render() {
         const { classes } = this.props;
 
         return (
-            <List
-                component="nav"
-                subheader={<ListSubheader component="div">Welcome to Local Show</ListSubheader>}
-                className={classes.root}
-            >
-                {
-                    Object.keys(this.state.files).map((key, index) => (
-                        <div key={key}>
-                            <ListItem button 
-                                onClick={() => {
-                                    this.handleFolderClick(key)
-                                }}
-                            >
-                                <ListItemIcon>
-                                    <FolderIcon />
-                                </ListItemIcon>
-                                <ListItemText inset primary={key.replace(this.state.info['root_folder']+"/", "")} />
-                                {this.shouldYouOpen(key) ? <ExpandLess /> : <ExpandMore />}
-                            </ListItem>
-                            <Collapse in={this.shouldYouOpen(key)} timeout="auto" unmountOnExit>
-                                <List component="div" disablePadding>
-                                    {
-                                        this.state.files[key].map((value, index) => (
-                                            <ListItem key={value} button className={classes.nested}>
-                                                <ListItemIcon>
-                                                    <StarBorder />
-                                                </ListItemIcon>
-                                                <ListItemText inset primary={value.replace(key+"/", "")} />
-                                            </ListItem>
-                                        ))
-                                    }
-                                </List>
-                            </Collapse>
-                        </div>
-                    ))
-                }
-                
-            </List>
+            <div>
+                <List
+                    component="nav"
+                    subheader={<ListSubheader component="div">Welcome to Local Show</ListSubheader>}
+                    className={classes.root}
+                >
+                    {
+                        Object.keys(this.state.files).map((key, index) => (
+                            <div key={key}>
+                                <ListItem button 
+                                    onClick={() => {
+                                        this.handleFolderClick(key)
+                                    }}
+                                >
+                                    <ListItemIcon>
+                                        <FolderIcon />
+                                    </ListItemIcon>
+                                    <ListItemText inset primary={key.replace(this.state.info['root_folder']+"/", "")} />
+                                    {this.shouldYouOpenFolder(key) ? <ExpandLess /> : <ExpandMore />}
+                                </ListItem>
+                                <Collapse in={this.shouldYouOpenFolder(key)} timeout="auto" unmountOnExit>
+                                    <List component="div" disablePadding>
+                                        {
+                                            this.state.files[key].map((value, index) => (
+                                                <ListItem key={value} button className={classes.nested}>
+                                                    <ListItemIcon>
+                                                        <StarBorder />
+                                                    </ListItemIcon>
+                                                    <ListItemText inset 
+                                                        primary={value.replace(key+"/", "")}
+                                                        onClick={() => {
+                                                            var name = value.replace(key+"/", "")
+                                                            var path = value
+                                                            this.handleFileClick(name, path)
+                                                        }}
+                                                    />
+                                                </ListItem>
+                                            ))
+                                        }
+                                    </List>
+                                </Collapse>
+                            </div>
+                        ))
+                    }
+                    
+                </List>
+
+                <ResponsiveDialog
+                    parentState={this.state}
+                    handlePopupClose={this.handlePopupClose}
+                >
+                </ResponsiveDialog>
+            </div>
         );
 
     }

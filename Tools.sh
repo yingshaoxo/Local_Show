@@ -8,6 +8,9 @@ build() {
     cd bin
     gox -output="{{.OS}}_{{.Arch}}" -os="linux" -os="windows" ../src
     cd ..
+
+    cd client
+    yarn build
 }
 
 serve() {

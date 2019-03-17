@@ -4,7 +4,6 @@ import './App.css';
 
 import NestedList from './List';
 
-
 class App extends Component {
   render() {
     return (

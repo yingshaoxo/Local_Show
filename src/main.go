@@ -27,12 +27,16 @@ func main() {
 	// Serve frontend static files
 	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
 
+	// Serve target files
+	router.Use(static.Serve("/media", static.LocalFile(MEDIA_PATH, true)))
+
 	// Setup route group for the API
 	api := router.Group("/api/")
 	{
 		api.Any("info/", func(c *gin.Context) {
 			c.JSON(http.StatusOK, gin.H{
-				"root_folder": files.Get_root_folder(MEDIA_PATH),
+				"server_media_root": MEDIA_PATH,
+				"root_folder":       files.Get_root_folder(MEDIA_PATH),
 			})
 		})
 

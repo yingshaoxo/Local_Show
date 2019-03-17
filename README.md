@@ -1,4 +1,4 @@
-# Let you enjoy your PC medium from webpage
+# Let you enjoy your PC media from webpage
 
 
 > Aim to use reactjs create html files, then use golang to serve.
