@@ -11,6 +11,7 @@ import FolderIcon from '@material-ui/icons/Folder';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
+import ChevronRight from '@material-ui/icons/ChevronRight';
 
 import {HOST} from './Const';
 import ResponsiveDialog from './Popup';
@@ -153,7 +154,7 @@ class NestedList extends React.Component {
                                             this.state.files[key].map((value, index) => (
                                                 <ListItem key={value} button className={classes.nested}>
                                                     <ListItemIcon>
-                                                        <StarBorder />
+                                                        <ChevronRight />
                                                     </ListItemIcon>
                                                     <ListItemText inset 
                                                         primary={value.replace(key+"/", "")}

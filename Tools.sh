@@ -3,14 +3,15 @@ hi() {
 }
 
 build() {
+    cd client
+    yarn build
+    cd ..
+
     mkdir bin
     rm bin/* -fr
     cd bin
     gox -output="{{.OS}}_{{.Arch}}" -os="linux" -os="windows" ../src
     cd ..
-
-    cd client
-    yarn build
 }
 
 serve() {
@@ -23,7 +24,9 @@ serve() {
     esac
     echo $architecture
 
-    ./bin/linux_$architecture
+    cd bin
+    ./linux_$architecture $2
+    cd ..
 }
 
 push() {

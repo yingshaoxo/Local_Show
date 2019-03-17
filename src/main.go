@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/contrib/static"
@@ -11,9 +12,13 @@ import (
 	"./files"
 )
 
-const MEDIA_PATH = "/media/data/Video/I have seen before"
-
 func main() {
+	// get cli args
+	var MEDIA_PATH = "/media/data/Video/I have seen before"
+	if len(os.Args) >= 2 {
+		MEDIA_PATH = os.Args[1]
+	}
+
 	// Get all files
 	var file_dict, _ = files.Get_all_dir_and_files(MEDIA_PATH)
 	fmt.Println(file_dict)

@@ -5,11 +5,30 @@
 
 ___
 
-Todo list:
+Complie:
+```
+./Tools.sh build
+```
+
+Usage:
+
+```
+./Tools.sh serve the_folder_you_want_to_serve(for example: /home/yingshaoxo/Videos)
+```
+___
+
+Finished list:
 
 * Golang restful api for getting file name and static url
 * reactjs show files in a list (categorized by folder name)
-* integrated with DPlayer, or supprt VR right in browser
+* integrated with DPlayer
+
+___
+
+Todo list:
+
+* supprt VR right in browser
+* complie with html files, so all source could be a single binary file
 
 ___
 
