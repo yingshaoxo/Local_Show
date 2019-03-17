@@ -29,6 +29,9 @@ const API_FUNCTION_GET_FILES = 'files/'
 
 class NestedList extends React.Component {
     state = {
+        info: {
+            'root_folder': ''
+        },
         files: {"Folder": ["No file has been found right now"]},
         open_folder: "",
     };
@@ -119,7 +122,7 @@ class NestedList extends React.Component {
                                 <ListItemIcon>
                                     <FolderIcon />
                                 </ListItemIcon>
-                                <ListItemText inset primary={key} />
+                                <ListItemText inset primary={key.replace(this.state.info['root_folder']+"/", "")} />
                                 {this.shouldYouOpen(key) ? <ExpandLess /> : <ExpandMore />}
                             </ListItem>
                             <Collapse in={this.shouldYouOpen(key)} timeout="auto" unmountOnExit>

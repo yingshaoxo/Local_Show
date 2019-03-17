@@ -4,48 +4,57 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 )
 
 func init() {
-	fmt.Println("you have imported files module")
-
-	/*
-		whatever := "me"
-		new_string := fmt.Sprintf("hi there, %s", whatever)
-		fmt.Println(new_string)
-
-		file_dict, err := get_all_dir_and_files("/media/data/Video")
-		if err == nil {
-			print_file_dict(file_dict)
-		}
-	*/
+	fmt.Println("files module has importd")
 }
 
 func Get_all_dir_and_files(root string) (map[string][]string, error) {
+	dir_list := []string{}
+	file_list := []string{}
+
+	err := filepath.Walk(root, func(path string, f os.FileInfo, err error) error {
+		if f.IsDir() {
+			dir_list = append(dir_list, path)
+		} else {
+			file_list = append(file_list, path)
+		}
+		return nil
+	})
+
+	sort.Strings(dir_list)
+	sort.Strings(file_list)
+	temp_file_list := []string{}
+
 	var file_dict = make(map[string][]string)
-	var temp_dir string
-	err := filepath.Walk(
-		root,
-		func(path string, info os.FileInfo, err error) error {
-			if strings.Contains(path, "/.") == false {
-				if info.IsDir() {
-					file_dict[path] = []string{}
-					temp_dir = path
+	for index := range dir_list {
+		index = len(dir_list) - 1 - index
+		dir := dir_list[index]
+		// now index starts from the end, you can inversely do things
+		for _, file := range file_list {
+			if strings.Contains(file, dir) {
+				_, key_exist := file_dict[dir]
+				if key_exist {
+					file_dict[dir] = append(file_dict[dir], file)
 				} else {
-					file_dict[temp_dir] = append(file_dict[temp_dir], path)
+					file_dict[dir] = []string{file}
 				}
+			} else {
+				temp_file_list = append(temp_file_list, file)
 			}
-			return nil
-		},
-	)
+		}
+		file_list = temp_file_list
+		temp_file_list = []string{}
+	}
+
 	return file_dict, err
 }
 
-func print_file_dict(file_dict map[string][]string) {
-	for dir, file_list := range file_dict {
-		if file_list != nil {
-			fmt.Printf("%s\n %#v \n\n\n", dir, file_list)
-		}
-	}
+func Get_root_folder(root string) string {
+	parts := strings.Split(root, "/")
+	parts_we_need := parts[:len(parts)-1]
+	return strings.Join(parts_we_need, "/")
 }

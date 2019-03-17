@@ -31,9 +31,8 @@ func main() {
 	api := router.Group("/api/")
 	{
 		api.Any("info/", func(c *gin.Context) {
-			file_dict, _ = files.Get_all_dir_and_files(MEDIA_PATH)
 			c.JSON(http.StatusOK, gin.H{
-				"base_folder": MEDIA_PATH,
+				"root_folder": files.Get_root_folder(MEDIA_PATH),
 			})
 		})
 
