@@ -13,6 +13,12 @@ Complie:
 Usage:
 
 ```
+sudo docker-compose up -d
+```
+
+or
+
+```
 ./Tools.sh serve the_folder_you_want_to_serve(for example: /home/yingshaoxo/Videos)
 ```
 ___
@@ -29,6 +35,7 @@ Todo list:
 
 * supprt VR right in browser
 * complie with html files, so all source could be a single binary file
+* supprt raspberry pi (with docker)
 
 ___
 
@@ -40,4 +47,5 @@ ___
 
 Thanks to:
 
-https://medium.com/@synapticsynergy/serving-a-react-app-with-golang-using-gin-c6402ee64a4b
+* https://medium.com/@synapticsynergy/serving-a-react-app-with-golang-using-gin-c6402ee64a4b
+* https://fabianlee.org/2018/05/10/docker-packaging-a-golang-version-of-hello-world-in-a-container/

@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  local-show:
+    image: yingshaoxo/local_show
+    ports:
+      - "5000:5000"
+    volumes:
+      - /media/data/Video:/data:rw
+    restart: always
+  sftp:
+    image: atmoz/sftp
+    volumes:
+      - /media/data/Video:/home/foo/upload
+    ports:
+      - "2222:22"
+    command: foo:pass:1001
+    restart: always

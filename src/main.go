@@ -14,7 +14,7 @@ import (
 
 func main() {
 	// get cli args
-	var MEDIA_PATH = "/media/data/Video/I have seen before"
+	var MEDIA_PATH = "/media"
 	if len(os.Args) >= 2 {
 		MEDIA_PATH = os.Args[1]
 	}
@@ -40,8 +40,7 @@ func main() {
 	{
 		api.Any("info/", func(c *gin.Context) {
 			c.JSON(http.StatusOK, gin.H{
-				"server_media_root": MEDIA_PATH,
-				"root_folder":       files.Get_root_folder(MEDIA_PATH),
+				"root_folder": MEDIA_PATH,
 			})
 		})
 

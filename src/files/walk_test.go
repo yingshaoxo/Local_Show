@@ -61,11 +61,3 @@ func print_file_dict(file_dict map[string][]string) {
 		}
 	}
 }
-
-func Test_get_root_folder(t *testing.T) {
-	result := Get_root_folder("/media/hi/video")
-	expected := "/media/hi"
-	if expected != result {
-		t.Errorf("result %s != %s", result, expected)
-	}
-}

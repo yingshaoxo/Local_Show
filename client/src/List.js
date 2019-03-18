@@ -33,7 +33,6 @@ const API_FUNCTION_GET_FILES = 'files/'
 class NestedList extends React.Component {
     state = {
         info: {
-            'server_media_root': '',
             'root_folder': ''
         },
         files: {"Folder": ["No file has been found right now"]},

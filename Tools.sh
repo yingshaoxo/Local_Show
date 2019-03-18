@@ -10,6 +10,7 @@ build() {
     mkdir bin
     rm bin/* -fr
     cd bin
+    export CGO_ENABLED=0
     gox -output="{{.OS}}_{{.Arch}}" -os="linux" -os="windows" ../src
     cd ..
 }

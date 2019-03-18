@@ -52,9 +52,3 @@ func Get_all_dir_and_files(root string) (map[string][]string, error) {
 
 	return file_dict, err
 }
-
-func Get_root_folder(root string) string {
-	parts := strings.Split(root, "/")
-	parts_we_need := parts[:len(parts)-1]
-	return strings.Join(parts_we_need, "/")
-}
