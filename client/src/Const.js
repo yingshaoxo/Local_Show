@@ -1,3 +1,8 @@
-export const HOST = ''
-//export const HOST = 'http://127.0.0.1:5000/'
-//export const HOST = 'http://192.168.43.31:5000/'
+var expected_host = ""
+if (window.location.port != '5000') {
+    expected_host = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + '5000': '') + "/"
+} else {
+    expected_host = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '') + "/"
+}
+
+export const HOST = expected_host

@@ -28,6 +28,7 @@ class MyVideoPlayer extends React.Component {
                             url: this.props.target_url
                             }}
                             autoplay='true'
+                            preload='metadata'
                             onError={() => {
                                 console.log("Something went wroung...")
                                 this.setState({
@@ -79,6 +80,7 @@ class ResponsiveDialog extends React.Component {
                     <DialogActions>
                         <Button 
                             onClick={() => {
+                                console.log(this.get_target_url())
                                 window.open(this.get_target_url(), "_blank")
                             }} 
                             color="primary" 

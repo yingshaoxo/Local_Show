@@ -5,12 +5,12 @@
 
 ___
 
-Complie:
+#### Complie:
 ```
 ./Tools.sh build
 ```
 
-Usage:
+#### Usage:
 
 ```
 sudo docker-compose up -d
@@ -19,11 +19,12 @@ sudo docker-compose up -d
 or
 
 ```
-./Tools.sh serve the_folder_you_want_to_serve(for example: /home/yingshaoxo/Videos)
+cd bin/
+./linux_amd64 the_folder_you_want_to_serve(for example: /home/yingshaoxo/Videos)
 ```
 ___
 
-Finished list:
+#### Finished list:
 
 * Golang restful api for getting file name and static url
 * reactjs show files in a list (categorized by folder name)
@@ -31,7 +32,7 @@ Finished list:
 
 ___
 
-Todo list:
+#### Todo list:
 
 * supprt VR right in browser
 * complie with html files, so all source could be a single binary file

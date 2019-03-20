@@ -23,11 +23,9 @@ serve() {
         x86_64) architecture="amd64" ;;
         arm)    dpkg --print-architecture | grep -q "arm64" && architecture="arm64" || architecture="arm" ;;
     esac
-    echo $architecture
 
-    cd bin
-    ./linux_$architecture $2
-    cd ..
+    echo "Tun the follow command: "
+    echo cd bin\; ./linux_$architecture "your/dir"
 }
 
 push() {
