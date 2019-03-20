@@ -40,13 +40,13 @@ ___
 
 ___
 
-Based on:
+#### Based on:
 
 * https://github.com/gin-gonic/gin
 
 ___
 
-Thanks to:
+#### Thanks to:
 
 * https://medium.com/@synapticsynergy/serving-a-react-app-with-golang-using-gin-c6402ee64a4b
 * https://fabianlee.org/2018/05/10/docker-packaging-a-golang-version-of-hello-world-in-a-container/
