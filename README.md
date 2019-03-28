@@ -24,19 +24,19 @@ cd bin/
 ```
 ___
 
-#### Finished list:
+#### Finished Feature list:
 
-* Golang restful api for getting file name and static url
+* Golang restful api for getting file_name and static url
 * reactjs show files in a list (categorized by folder name)
-* integrated with DPlayer
+* integrate with DPlayer
 
 ___
 
-#### Todo list:
+#### Todo Feature list:
 
 * supprt VR right in browser
-* complie with html files, so all source could be a single binary file
-* supprt raspberry pi (with docker)
+* complie with html files, so that all source could be in a single binary file
+* supprt raspberry pi arm32 (with docker)
 
 ___
 
