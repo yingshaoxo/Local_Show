@@ -2,17 +2,26 @@ version: '3'
 
 services:
   local-show:
-    image: yingshaoxo/local_show
+    image: yingshaoxo/local_show:latest
     ports:
       - "5000:5000"
     volumes:
       - /media/data/Video:/data:rw
     restart: always
-  sftp:
-    image: atmoz/sftp
-    volumes:
-      - /media/data/Video:/home/foo/upload
+  aria2-ui:
+    image: wahyd4/aria2-ui:latest 
     ports:
-      - "2222:22"
-    command: foo:pass:1001
+      - "8000:80"
+      - "6800:6800"
+      - "443:443"
+    volumes:
+      - /media/data/Video:/data:rw
+    restart: always
+  zeronet:
+    image: nofish/zeronet
+    ports:
+      - "26552:26552"
+      - "43110:43110"
+    volumes:
+      - /home/yingshaoxo/Downloads/zeronet:/root/data
     restart: always

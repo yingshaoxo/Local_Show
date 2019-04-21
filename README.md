@@ -13,7 +13,9 @@ ___
 #### Usage:
 
 ```
+# make some changes to docker-compose.yml
 sudo docker-compose up -d
+# go to localhost:8000/ui/ for downloading, localhost:8000 for file-management, localhost:43110 for magnet-link, localhost:5000 for watching.
 ```
 
 or
