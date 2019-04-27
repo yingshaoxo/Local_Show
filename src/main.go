@@ -27,7 +27,10 @@ func main() {
 	router := gin.Default()
 
 	// Enable cors
-	router.Use(cors.Default())
+	//router.Use(cors.Default())
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"*"}
+	router.Use(cors.New(config))
 
 	// Serve frontend static files
 	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))

@@ -4,6 +4,7 @@ hi() {
 
 build() {
     cd client
+    yarn 
     yarn build
     cd ..
 
@@ -11,6 +12,10 @@ build() {
     rm bin/* -fr
     cd bin
     export CGO_ENABLED=0
+    go get github.com/mitchellh/gox
+    go get github.com/gin-gonic/gin
+    go get github.com/gin-gonic/contrib/static
+    go get github.com/gin-contrib/cors
     gox -output="{{.OS}}_{{.Arch}}" -os="linux" -os="windows" ../src
     cd ..
 }

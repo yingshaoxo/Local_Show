@@ -15,6 +15,7 @@ import ChevronRight from '@material-ui/icons/ChevronRight';
 
 import {HOST} from './Const';
 import ResponsiveDialog from './Popup';
+import CornerButton from './CornerButton';
 
 const styles = theme => ({
     root: {
@@ -29,6 +30,7 @@ const styles = theme => ({
 const API_BASE = HOST + 'api/'
 const API_FUNCTION_GET_INFO = 'info/'
 const API_FUNCTION_GET_FILES = 'files/'
+const API_FUNCTION_UPDATE_FILES = 'update/'
 
 class NestedList extends React.Component {
     state = {
@@ -43,12 +45,10 @@ class NestedList extends React.Component {
         selected_file_path: 'https://yingshaoxo.xyz',
     };
 
-    componentDidMount() {
-        var url = ""
-
+    function_get_info = () => {
         // get info
-        url = `${API_BASE}${API_FUNCTION_GET_INFO}`;
-        fetch(url, {
+        var url = `${API_BASE}${API_FUNCTION_GET_INFO}`;
+        return fetch(url, {
             method: "POST",
             mode: "cors",
             cache: "no-cache",
@@ -65,11 +65,13 @@ class NestedList extends React.Component {
                 info: result,
             }))
         })
-        .catch(error => console.log(error));
+        //.catch(error => console.log(error));
+    }
 
+    function_get_files = () => {
         // get files
-        url = `${API_BASE}${API_FUNCTION_GET_FILES}`;
-        fetch(url, {
+        var url = `${API_BASE}${API_FUNCTION_GET_FILES}`;
+        return fetch(url, {
             method: "POST",
             mode: "cors",
             cache: "no-cache",
@@ -86,7 +88,32 @@ class NestedList extends React.Component {
                 files: result,
             }))
         })
-        .catch(error => console.log(error));
+        //.catch(error => console.log(error));
+    }
+
+    function_update_files = async () => {
+        // update files
+        var url = `${API_BASE}${API_FUNCTION_UPDATE_FILES}`;
+        return fetch(url, {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then(
+            response => response.json()
+        )
+        .then(result => {
+            console.log(result)
+        })
+        //.catch(error => console.log(error));
+    }
+
+    async componentDidMount() {
+        await this.function_get_info();
+        await this.function_get_files();
     }
 
     handleFolderClick = (key) => {
@@ -121,6 +148,44 @@ class NestedList extends React.Component {
         this.setState(state => ({
             keep_popup_open: false 
         }))
+    }
+
+    handleCornerButtonClick = async () => {
+        // We do this to refresh file list and filter some unimportant files
+        await this.function_update_files()
+        await this.function_get_files();
+
+        var files = this.state.files
+        console.log(Object.keys(files).length)
+        var new_dict = new Map()
+        Object.keys(files).forEach(function(key) {
+            var value = files[key]
+            var new_value = []
+            var ok = false
+
+            Object.keys(value).forEach(function(sub_key) {
+                var sub_value = value[sub_key]
+                var extension = (/[.]/.exec(sub_value)) ? /[^.]+$/.exec(sub_value)[0] : undefined
+                if ((extension != undefined) && (['mp4', 'avi', 'mkv', 'rmvb'].includes(extension.toLowerCase()))) {
+                    ok = true
+                    new_value.push(sub_value)
+                }
+            })
+
+            if (ok) {
+                new_dict.set(key, new_value)
+            }
+        });
+
+        let obj = Array.from(new_dict).reduce((obj, [key, value]) => (
+            Object.assign(obj, { [key]: value })
+        ), {});
+        this.setState(state => ({
+            files: obj
+        }))
+
+        console.log(obj)
+        console.log(Object.keys(obj).length)
     }
 
     render() {
@@ -173,6 +238,11 @@ class NestedList extends React.Component {
                     }
                     
                 </List>
+
+                <CornerButton
+                    handleCornerButtonClick={this.handleCornerButtonClick}
+                >
+                </CornerButton>
 
                 <ResponsiveDialog
                     parentState={this.state}
