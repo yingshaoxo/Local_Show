@@ -15,7 +15,7 @@ ___
 ```
 # make some changes to docker-compose.yml
 sudo docker-compose up -d
-# go to localhost:8000/ui/ for downloading, localhost:8000 for file-management, localhost:43110 for magnet-link, localhost:5000 for watching.
+# go to localhost:8000/ui/ for downloading, localhost:8000/files/ for file-management, localhost:43110 for magnet-link, localhost:5000 for watching.
 ```
 
 or
@@ -31,6 +31,7 @@ ___
 * Golang restful api for getting file_name and static url
 * reactjs show files in a list (categorized by folder name)
 * integrate with DPlayer
+* could update file list and filter non-video files with one red button
 
 ___
 
