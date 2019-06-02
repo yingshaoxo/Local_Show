@@ -25,3 +25,17 @@ services:
     volumes:
       - /home/yingshaoxo/Downloads/zeronet:/root/data
     restart: always
+  plex:
+    image: linuxserver/plex
+    container_name: plex
+    network_mode: host
+    environment:
+    - PUID=1000
+    - PGID=999
+    - VERSION=docker
+    volumes:
+    - ${USERDIR}/docker/plex:/config
+    - /media/data/Video:/data
+    - ${USERDIR}/plex-temp/plex_tmp:/transcode
+    - ${USERDIR}/docker/shared:/shared
+    restart: unless-stopped
