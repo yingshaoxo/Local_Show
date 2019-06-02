@@ -22,6 +22,7 @@ ___
 # make some changes to docker-compose.yml
 sudo docker-compose up -d
 # go to localhost:8000/ui/ for downloading, localhost:8000/files/ for file-management, localhost:43110 for magnet-link, localhost:5000 for watching.
+# go to localhost:32400/web to set Plex Server
 ```
 
 or
