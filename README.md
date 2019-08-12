@@ -12,6 +12,8 @@ ___
 ___
 
 #### Complie:
+Have `yarn` and `golang` installed first.
+
 ```
 ./Tools.sh build
 ```

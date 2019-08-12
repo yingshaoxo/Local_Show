@@ -46,7 +46,7 @@ class MyVideoPlayer extends React.Component {
 
 class ResponsiveDialog extends React.Component {
     get_target_url = () => {
-        var root_folder = this.props.parentState.info['root_folder'] + "/"
+        var root_folder = this.props.parentState.info['root_folder']
         var path = this.props.parentState.selected_file_path
         var target_url = MEDIA_BASE + path.replace(root_folder, "")
         return target_url
