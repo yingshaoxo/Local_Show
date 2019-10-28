@@ -16,7 +16,16 @@ build() {
     go get github.com/gin-gonic/gin
     go get github.com/gin-gonic/contrib/static
     go get github.com/gin-contrib/cors
-    go get -u github.com/gobuffalo/packr/v2/...
+    #go get github.com/gobuffalo/packr/v2/...
+    go get github.com/GeertJohan/go.rice
+    go get github.com/GeertJohan/go.rice/rice
+
+    cd ..
+    cd src
+    rice embed-go
+    cd ..
+
+    cd bin
     gox -output="{{.OS}}_{{.Arch}}" -os="linux" -os="windows" ../src
     cd ..
 }

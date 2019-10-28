@@ -10,8 +10,7 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
-
-	"github.com/GeertJohan/go.rice"
+	"github.com/gobuffalo/packr/v2"
 
 	"./files"
 )
@@ -51,8 +50,8 @@ func main() {
 	router.Use(cors.New(config))
 
 	// Serve frontend static files
-	box := rice.MustFindBox("../client/build")
-	router.StaticFS("/ui/", box.HTTPBox())
+	frontend_box := packr.New("frontend_box", "../client/build")
+	router.StaticFS("/ui/", frontend_box)
 
 	// Serve target files
 	router.Use(static.Serve("/media", static.LocalFile(MEDIA_PATH, true)))
