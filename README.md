@@ -11,27 +11,18 @@ ___
 
 ___
 
+#### Usage:
+1. Download binary file: https://github.com/yingshaoxo/Local_Show/releases/tag/0.2
+2. Put it to the folder where your media exists
+3. Run it!
+
+___
+
 #### Complie:
 Have `yarn` and `golang` installed first.
 
 ```
 ./Tools.sh build
-```
-
-#### Usage:
-
-```
-# make some changes to docker-compose.yml
-sudo docker-compose up -d
-# go to localhost:8000/ui/ for downloading, localhost:8000/files/ for file-management, localhost:43110 for magnet-link, localhost:5000 for watching.
-# go to localhost:32400/web to set Plex Server
-```
-
-or
-
-```
-cd bin/
-./linux_amd64 the_folder_you_want_to_serve(for example: /home/yingshaoxo/Videos)
 ```
 ___
 
