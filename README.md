@@ -38,14 +38,16 @@ ___
 #### Todo Feature list:
 
 * supprt VR right in browser
-* complie with html files, so that all source could be in a single binary file
-* supprt raspberry pi arm32 (with docker)
 
 ___
 
 #### Based on:
 
 * https://github.com/gin-gonic/gin
+* https://github.com/GeertJohan/go.rice
+* https://github.com/gin-contrib/cors
+* https://github.com/gin-gonic/contrib/static
+* https://github.com/mitchellh/gox
 
 ___
 
