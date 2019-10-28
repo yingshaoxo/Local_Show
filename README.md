@@ -1,7 +1,7 @@
 # Let you enjoy your PC media from webpage
 
 
-> Aim to use reactjs create html files, then use golang to serve.
+> Aim to use reactjs to generate html files, then use golang to serve it.
 
 ___
 
@@ -12,7 +12,7 @@ ___
 ___
 
 #### Usage:
-1. Download binary file: https://github.com/yingshaoxo/Local_Show/releases/tag/0.2
+1. Download the binary file: https://github.com/yingshaoxo/Local_Show/releases/tag/0.2
 2. Put it to the folder where your media exists
 3. Run it!
 
