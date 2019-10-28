@@ -4,17 +4,34 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"os/exec"
+	"runtime"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
+	"github.com/gobuffalo/packr/v2"
 
 	"./files"
 )
 
+func openBrowser(url string) {
+	switch runtime.GOOS {
+	case "linux":
+		exec.Command("xdg-open", url).Start()
+	case "windows":
+		exec.Command("rundll32", "url.dll,FileProtocolHandler", url).Start()
+	case "darwin":
+		exec.Command("open", url).Start()
+	default:
+		fmt.Errorf("unsupported platform")
+	}
+}
+
 func main() {
 	// get cli args
-	var MEDIA_PATH = "/media"
+	dir, _ := os.Getwd()
+	var MEDIA_PATH = dir //"/media"
 	if len(os.Args) >= 2 {
 		MEDIA_PATH = os.Args[1]
 	}
@@ -33,7 +50,8 @@ func main() {
 	router.Use(cors.New(config))
 
 	// Serve frontend static files
-	router.Use(static.Serve("/", static.LocalFile("../client/build", true)))
+	frontend_box := packr.New("frontend_box", "../client/build")
+	router.StaticFS("/ui/", frontend_box)
 
 	// Serve target files
 	router.Use(static.Serve("/media", static.LocalFile(MEDIA_PATH, true)))
@@ -59,6 +77,9 @@ func main() {
 			c.JSON(http.StatusOK, file_dict)
 		})
 	}
+
+	// Open link
+	openBrowser("http://127.0.0.1:5000/ui")
 
 	// Start and run the server
 	router.Run(":5000")

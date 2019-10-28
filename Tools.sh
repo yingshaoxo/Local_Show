@@ -16,6 +16,7 @@ build() {
     go get github.com/gin-gonic/gin
     go get github.com/gin-gonic/contrib/static
     go get github.com/gin-contrib/cors
+    go get -u github.com/gobuffalo/packr/v2/...
     gox -output="{{.OS}}_{{.Arch}}" -os="linux" -os="windows" ../src
     cd ..
 }
