@@ -22,6 +22,7 @@ build() {
 
     cd ..
     cd src
+    rm rice-box.go
     rice embed-go
     cd ..
 
