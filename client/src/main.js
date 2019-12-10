@@ -10,8 +10,8 @@ Vue.config.productionTip = false
 Vue.use(Vuex)
 Vue.use(BootstrapVue)
 
-const HOST = "http://127.0.0.1:5000/"
-const API_BASE = HOST + 'api/'
+const HOST = ""
+const API_BASE = HOST + '/api/'
 const API_FUNCTION_GET_INFO = API_BASE + 'info/'
 const API_FUNCTION_GET_FILES = API_BASE + 'files/'
 const API_FUNCTION_UPDATE_FILES = API_BASE + 'update/'

@@ -47,7 +47,7 @@ export default {
       return value.replace(key + "/", "");
     },
     start_to_play(file) {
-      let real_path = this.$store.state.host + "media/" + file.replace(this.$store.state.info["root_folder"] + "/", "")
+      let real_path = "/media/" + file.replace(this.$store.state.info["root_folder"], "")
 
       this.$refs['modal'].show()
 
