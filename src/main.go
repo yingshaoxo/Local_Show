@@ -2,10 +2,12 @@ package main
 
 import (
 	"fmt"
+	"net"
 	"net/http"
 	"os"
 	"os/exec"
 	"runtime"
+	"strings"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/contrib/static"
@@ -39,7 +41,7 @@ func main() {
 
 	// Get all files
 	var file_dict, _ = files.Get_all_dir_and_files(MEDIA_PATH)
-	fmt.Println(file_dict)
+	//fmt.Println(file_dict)
 
 	// Set the router as the default one shipped with Gin
 	router := gin.Default()
@@ -79,8 +81,24 @@ func main() {
 		})
 	}
 
+	local_address := "127.0.0.1"
+	addrs, err := net.InterfaceAddrs()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("\n\n-------------------------------\n\n")
+	for _, addr := range addrs {
+		lists := strings.Split(addr.String(), "/")
+		fmt.Printf("You can visit your media at: http://%v:5000/ui\n", lists[0])
+
+		if strings.Contains(lists[0], "192.168") {
+			local_address = lists[0]
+		}
+	}
+	fmt.Printf("\n\n-------------------------------\n\n")
+
 	// Open link
-	openBrowser("http://127.0.0.1:5000/ui")
+	openBrowser("http://" + local_address + ":5000/ui")
 
 	// Start and run the server
 	router.Run(":5000")

@@ -1,7 +1,6 @@
 package files
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"sort"
@@ -9,7 +8,7 @@ import (
 )
 
 func init() {
-	fmt.Println("files module has importd")
+	//fmt.Println("files module has importd")
 }
 
 func Get_all_dir_and_files(root string) (map[string][]string, error) {
