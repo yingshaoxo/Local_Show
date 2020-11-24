@@ -27,7 +27,7 @@ build() {
     cd ..
 
     cd bin
-    gox -output="{{.OS}}_{{.Arch}}" -osarch="linux/amd64" -osarch="linux/arm64" -osarch="windows/amd64" -osarch="windows/386" ../src
+    gox -output="LocalShow_{{.OS}}_{{.Arch}}" -osarch="linux/amd64" -osarch="linux/arm64" -osarch="windows/amd64" -osarch="windows/386" ../src
     cd ..
 }
 
