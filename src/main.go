@@ -2,18 +2,22 @@ package main
 
 import (
 	"fmt"
+	"net"
 	"net/http"
 	"os"
 	"os/exec"
 	"runtime"
+	"strings"
+	"time"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
+	"github.com/mdp/qrterminal"
 
-	"github.com/GeertJohan/go.rice"
+	rice "github.com/GeertJohan/go.rice"
 
-	"./files"
+	"github.com/yingshaoxo/Local_Show/files"
 )
 
 func openBrowser(url string) {
@@ -79,8 +83,37 @@ func main() {
 		})
 	}
 
-	// Open link
-	openBrowser("http://127.0.0.1:5000/ui")
+	local_address := "127.0.0.1"
+	addrs, err := net.InterfaceAddrs()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("\n\n-------------------------------\n\n")
+	for _, addr := range addrs {
+		lists := strings.Split(addr.String(), "/")
+		fmt.Printf("You can visit your media at: http://%v:5000/ui\n", lists[0])
+
+		if strings.Contains(lists[0], "192.168") {
+			local_address = lists[0]
+		}
+	}
+
+	var target_url = "http://" + local_address + ":5000/ui"
+	go func() {
+		fmt.Printf("\n\n-------------------------------\n\n")
+
+		// Open link
+		openBrowser(target_url)
+
+		time.Sleep(2 * time.Second)
+
+		// show qr
+		fmt.Println("\n\n")
+		qrterminal.Generate(target_url, qrterminal.M, os.Stdout)
+		fmt.Println("\n\n")
+
+		fmt.Printf("You can visit your media at: %v\n", target_url)
+	}()
 
 	// Start and run the server
 	router.Run(":5000")

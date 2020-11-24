@@ -22,11 +22,12 @@ build() {
 
     cd ..
     cd src
+    rm rice-box.go
     rice embed-go
     cd ..
 
     cd bin
-    gox -output="{{.OS}}_{{.Arch}}" -os="linux" -os="windows" ../src
+    gox -output="{{.OS}}_{{.Arch}}" -osarch="linux/amd64" -osarch="linux/arm64" -osarch="windows/amd64" -osarch="windows/386" ../src
     cd ..
 }
 

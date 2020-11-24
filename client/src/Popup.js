@@ -60,6 +60,7 @@ class ResponsiveDialog extends React.Component {
             <div>
                 <Dialog
                     fullScreen={false}
+                    maxWidth={"lg"}
                     open={this.props.parentState.keep_popup_open}
                     onClose={this.props.handlePopupClose}
                     aria-labelledby="responsive-dialog-title"
