@@ -10,6 +10,7 @@
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-dplayer": "^0.2.3",
+    "react-player": "^2.7.0",
     "react-scripts": "2.1.8"
   },
   "scripts": {

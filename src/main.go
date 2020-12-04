@@ -11,7 +11,6 @@ import (
 	"time"
 
 	"github.com/gin-contrib/cors"
-	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 	"github.com/mdp/qrterminal"
 
@@ -59,7 +58,8 @@ func main() {
 	router.StaticFS("/ui/", box.HTTPBox())
 
 	// Serve target files
-	router.Use(static.Serve("/media", static.LocalFile(MEDIA_PATH, true)))
+	//router.Use(static.Serve("/media", static.LocalFile(MEDIA_PATH, true)))
+	router.StaticFS("/media", http.Dir(MEDIA_PATH))
 
 	// Setup route group for the API
 	api := router.Group("/api/")
@@ -80,6 +80,7 @@ func main() {
 		api.Any("files/", func(c *gin.Context) {
 			//whatever := c.Query("name")
 			c.JSON(http.StatusOK, file_dict)
+			runtime.GC()
 		})
 	}
 
@@ -116,5 +117,15 @@ func main() {
 	}()
 
 	// Start and run the server
-	router.Run(":5000")
+	//router.Run(":5000")
+
+	s := &http.Server{
+		Addr:           ":5000",
+		Handler:        router,
+		ReadTimeout:    1 * time.Second,
+		WriteTimeout:   1 * time.Second,
+		IdleTimeout:    1 * time.Second,
+		MaxHeaderBytes: 1 << 20,
+	}
+	s.ListenAndServe()
 }

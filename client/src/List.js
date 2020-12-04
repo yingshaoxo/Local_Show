@@ -195,7 +195,7 @@ class NestedList extends React.Component {
             <div>
                 <List
                     component="nav"
-                    subheader={<ListSubheader component="div">Welcome to Local Show</ListSubheader>}
+                    subheader={<ListSubheader component="div">Welcome to the Local Show</ListSubheader>}
                     className={classes.root}
                 >
                     {

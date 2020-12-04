@@ -12,7 +12,7 @@ class App extends Component {
           >
           </NestedList>
           <p style={{color:'grey'}}><small><small>
-              Made by <a href="https://github.com/yingshaoxo" target="_blank" style={{color:'red'}}>yingshaoxo</a>
+              Made by <a href="https://yingshaoxo.blogspot.com" target="_blank" style={{color:'red'}}>yingshaoxo</a>
           </small></small></p>
       </div>
     );
