@@ -117,8 +117,9 @@ func main() {
 	}()
 
 	// Start and run the server
-	//router.Run(":5000")
+	router.Run(":5000")
 
+	/*
 	s := &http.Server{
 		Addr:           ":5000",
 		Handler:        router,
@@ -128,4 +129,5 @@ func main() {
 		MaxHeaderBytes: 1 << 20,
 	}
 	s.ListenAndServe()
+	*/
 }
