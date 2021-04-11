@@ -6,16 +6,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - /media/data/Video:/data:rw
-    restart: always
-  aria2-ui:
-    image: wahyd4/aria2-ui:latest 
-    ports:
-      - "8000:80"
-      - "6800:6800"
-      - "443:443"
-    volumes:
-      - /media/data/Video:/data:rw
+      - /media/data/transmission/downloads/complete:/data:rw
     restart: always
   zeronet:
     image: nofish/zeronet
@@ -23,19 +14,24 @@ services:
       - "26552:26552"
       - "43110:43110"
     volumes:
-      - /home/yingshaoxo/Downloads/zeronet:/root/data
+      - /media/data/zeronet:/root/data
     restart: always
-  plex:
-    image: linuxserver/plex
-    container_name: plex
-    network_mode: host
+  transmission:
+    image: linuxserver/transmission
+    container_name: transmission
     environment:
-    - PUID=1000
-    - PGID=999
-    - VERSION=docker
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+      - USER=yingshaoxo #optional
+      - PASS=your_password #optional
     volumes:
-    - ${USERDIR}/docker/plex:/config
-    - /media/data/Video:/data
-    - ${USERDIR}/plex-temp/plex_tmp:/transcode
-    - ${USERDIR}/docker/shared:/shared
+      - /media/data/transmission/config:/config
+      - /media/data/transmission/downloads:/downloads
+      - /media/data/transmission/watch:/watch
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
     restart: unless-stopped
