@@ -19,6 +19,7 @@ build() {
     #go get github.com/gobuffalo/packr/v2/...
     go get github.com/GeertJohan/go.rice
     go get github.com/GeertJohan/go.rice/rice
+    go get github.com/skip2/go-qrcode/...
 
     cd ..
     cd src

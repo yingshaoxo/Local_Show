@@ -7,6 +7,7 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
+	"strconv"
 	"strings"
 	"time"
 
@@ -30,6 +31,21 @@ func openBrowser(url string) {
 	default:
 		fmt.Errorf("unsupported platform")
 	}
+}
+
+func findAvailablePort(port int) string {
+	for true {
+		postStr := strconv.Itoa(port)
+		connection, err := net.Listen("tcp", ":"+postStr)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Can't listen on port %q: %s", port, err)
+			port += 1
+		} else {
+			connection.Close()
+			break
+		}
+	}
+	return strconv.Itoa(port)
 }
 
 func main() {
@@ -82,6 +98,7 @@ func main() {
 			c.JSON(http.StatusOK, file_dict)
 			runtime.GC()
 		})
+
 	}
 
 	local_address := "127.0.0.1"
@@ -99,7 +116,9 @@ func main() {
 		}
 	}
 
-	var target_url = "http://" + local_address + ":5000/ui"
+	port := findAvailablePort(5000)
+
+	var target_url = "http://" + local_address + ":" + port + "/ui"
 	go func() {
 		fmt.Printf("\n\n-------------------------------\n\n")
 
@@ -117,17 +136,17 @@ func main() {
 	}()
 
 	// Start and run the server
-	router.Run(":5000")
+	router.Run(":" + port)
 
 	/*
-	s := &http.Server{
-		Addr:           ":5000",
-		Handler:        router,
-		ReadTimeout:    1 * time.Second,
-		WriteTimeout:   1 * time.Second,
-		IdleTimeout:    1 * time.Second,
-		MaxHeaderBytes: 1 << 20,
-	}
-	s.ListenAndServe()
+		s := &http.Server{
+			Addr:           ":5000",
+			Handler:        router,
+			ReadTimeout:    1 * time.Second,
+			WriteTimeout:   1 * time.Second,
+			IdleTimeout:    1 * time.Second,
+			MaxHeaderBytes: 1 << 20,
+		}
+		s.ListenAndServe()
 	*/
 }
