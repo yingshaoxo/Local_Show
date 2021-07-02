@@ -56,6 +56,12 @@ func main() {
 		MEDIA_PATH = os.Args[1]
 	}
 
+	// ping
+	ping_dict := map[string]string{
+		"name":    "local_show",
+		"sub_url": "/ui",
+	}
+
 	// Get all files
 	var file_dict, _ = files.Get_all_dir_and_files(MEDIA_PATH)
 	fmt.Println(file_dict)
@@ -99,6 +105,11 @@ func main() {
 			runtime.GC()
 		})
 
+		api.Any("ping/", func(c *gin.Context) {
+			//whatever := c.Query("name")
+			c.JSON(http.StatusOK, ping_dict)
+			runtime.GC()
+		})
 	}
 
 	local_address := "127.0.0.1"
@@ -133,6 +144,8 @@ func main() {
 		fmt.Println("\n\n")
 
 		fmt.Printf("You can visit your media at: %v\n", target_url)
+
+		ping_dict["url"] = target_url
 	}()
 
 	// Start and run the server
