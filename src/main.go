@@ -79,6 +79,11 @@ func main() {
 	box := rice.MustFindBox("../client/build")
 	router.StaticFS("/ui/", box.HTTPBox())
 
+	// handle not found error
+	router.NoRoute(func(c *gin.Context) {
+		c.Redirect(http.StatusMovedPermanently, "/ui/")
+	})
+
 	// Serve target files
 	//router.Use(static.Serve("/media", static.LocalFile(MEDIA_PATH, true)))
 	router.StaticFS("/media", http.Dir(MEDIA_PATH))
