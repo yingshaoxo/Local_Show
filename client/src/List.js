@@ -166,7 +166,7 @@ class NestedList extends React.Component {
             Object.keys(value).forEach(function(sub_key) {
                 var sub_value = value[sub_key]
                 var extension = (/[.]/.exec(sub_value)) ? /[^.]+$/.exec(sub_value)[0] : undefined
-                if ((extension != undefined) && (['mp4', 'avi', 'mkv', 'rmvb'].includes(extension.toLowerCase()))) {
+                if ((extension != undefined) && (['mp4', 'avi', 'mkv', 'rmvb', 'wmv'].includes(extension.toLowerCase()))) {
                     ok = true
                     new_value.push(sub_value)
                 }
