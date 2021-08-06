@@ -8,14 +8,6 @@ services:
     volumes:
       - /media/data/transmission/downloads/complete:/data:rw
     restart: always
-  zeronet:
-    image: nofish/zeronet
-    ports:
-      - "26552:26552"
-      - "43110:43110"
-    volumes:
-      - /media/data/zeronet:/root/data
-    restart: always
   transmission:
     image: linuxserver/transmission
     container_name: transmission
