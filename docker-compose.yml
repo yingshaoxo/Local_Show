@@ -10,25 +10,24 @@ services:
     ports:
       - "5012:5012"
     volumes:
-      # - /media/data/transmission/downloads/complete:/data:rw
-      - /Users/yingshaoxo/Movies/Videos:/data:r
+       - ./data_/transmission/downloads/complete:/data:r
     restart: always
-  # transmission:
-  #   image: linuxserver/transmission
-  #   container_name: transmission
-  #   environment:
-  #     - PUID=1000
-  #     - PGID=1000
-  #     - TZ=Europe/London
-  #     - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
-  #     - USER=yingshaoxo #optional
-  #     - PASS=your_password #optional
-  #   volumes:
-  #     - /media/data/transmission/config:/config
-  #     - /media/data/transmission/downloads:/downloads
-  #     - /media/data/transmission/watch:/watch
-  #   ports:
-  #     - 9091:9091
-  #     - 51413:51413
-  #     - 51413:51413/udp
-  #   restart: unless-stopped
+  transmission:
+    image: linuxserver/transmission
+    container_name: transmission
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+      - USER=yingshaoxo #optional
+      - PASS=your_password #optional
+    volumes:
+      - ./data_/transmission/config:/config
+      - ./data_/transmission/downloads:/downloads
+      - ./data_/transmission/watch:/watch
+    ports:
+      - 9091:9091
+      - 51413:51413
+      - 51413:51413/udp
+    restart: unless-stopped

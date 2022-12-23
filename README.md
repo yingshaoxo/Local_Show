@@ -16,6 +16,8 @@ ___
 2. Put it to the folder where your media exists
 3. Run it!
 
+> docker-compose: https://hub.docker.com/repository/docker/yingshaoxo/local_show
+
 ___
 
 #### Complie:

@@ -1,3 +1,4 @@
 .pytest_cache
 *.mp4
 .DS_Store
+data_/
