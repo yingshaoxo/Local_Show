@@ -12,7 +12,7 @@ ___
 ___
 
 #### Usage:
-1. Download the binary file: https://github.com/yingshaoxo/Local_Show/releases/tag/0.5
+1. Download the binary file: https://github.com/yingshaoxo/Local_Show/releases/tag/0.6
 2. Put it to the folder where your media exists
 3. Run it!
 
@@ -30,8 +30,9 @@ ___
 
 * Golang restful api for getting file_name and static url
 * reactjs show files in a list (categorized by folder name)
-* integrate with DPlayer
-* could update file list and filter non-video files with one red button
+* integrate with ReactPlayer
+* could update file list and filter non-video files with one button
+* could remember the last selection
 
 ___
 
@@ -44,7 +45,6 @@ ___
 #### Based on:
 
 * https://github.com/gin-gonic/gin
-* https://github.com/GeertJohan/go.rice
 * https://github.com/gin-contrib/cors
 * https://github.com/gin-gonic/contrib/static
 * https://github.com/mitchellh/gox

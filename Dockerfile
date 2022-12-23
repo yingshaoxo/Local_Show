@@ -1,15 +1,24 @@
-FROM alpine:3.7
+# docker build --tag yingshaoxo/local_show .
+FROM node:latest as node_builder 
+COPY ./client /work_space/client
+WORKDIR /work_space/client
+RUN yarn
+RUN yarn build
 
-RUN mkdir -p /bin
-COPY ./bin/linux_amd64 /bin/
+FROM golang:1.18-bullseye as go_builder 
+COPY ./server /work_space/server
+WORKDIR /work_space/server
+COPY --from=node_builder /work_space/client/dist /work_space/client/dist
+RUN bash build.sh
 
-RUN mkdir -p /client/build
-COPY ./client/build /client/build
 
-RUN mkdir -p /data
+
+FROM ubuntu:focal
+COPY --from=go_builder /work_space/server/binary/LocalShow_linux_amd64 /bin/local_show
 
 WORKDIR /bin
+RUN mkdir -p /data
 
-EXPOSE 5000
+EXPOSE 5012
 
-CMD ["/bin/linux_amd64", "/data"]
+CMD ["/bin/local_show", "/data"]

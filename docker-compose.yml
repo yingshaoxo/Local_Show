@@ -2,28 +2,33 @@ version: '3'
 
 services:
   local-show:
+    platform: linux/amd64
     image: yingshaoxo/local_show:latest
+    # build:
+    #   context: ./
+    #   dockerfile: ./Dockerfile
     ports:
-      - "5000:5000"
+      - "5012:5012"
     volumes:
-      - /media/data/transmission/downloads/complete:/data:rw
+      # - /media/data/transmission/downloads/complete:/data:rw
+      - /Users/yingshaoxo/Movies/Videos:/data:r
     restart: always
-  transmission:
-    image: linuxserver/transmission
-    container_name: transmission
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
-      - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
-      - USER=yingshaoxo #optional
-      - PASS=your_password #optional
-    volumes:
-      - /media/data/transmission/config:/config
-      - /media/data/transmission/downloads:/downloads
-      - /media/data/transmission/watch:/watch
-    ports:
-      - 9091:9091
-      - 51413:51413
-      - 51413:51413/udp
-    restart: unless-stopped
+  # transmission:
+  #   image: linuxserver/transmission
+  #   container_name: transmission
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Europe/London
+  #     - TRANSMISSION_WEB_HOME=/combustion-release/ #optional
+  #     - USER=yingshaoxo #optional
+  #     - PASS=your_password #optional
+  #   volumes:
+  #     - /media/data/transmission/config:/config
+  #     - /media/data/transmission/downloads:/downloads
+  #     - /media/data/transmission/watch:/watch
+  #   ports:
+  #     - 9091:9091
+  #     - 51413:51413
+  #     - 51413:51413/udp
+  #   restart: unless-stopped
