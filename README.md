@@ -13,10 +13,14 @@ ___
 
 #### Usage:
 1. Download the binary file: https://github.com/yingshaoxo/Local_Show/releases/tag/0.6
-2. Put it to the folder where your media exists
+2. Put it at the folder where your media exists
 3. Run it!
 
-> docker-compose: https://hub.docker.com/repository/docker/yingshaoxo/local_show
+> Or `./LocalShow_linux_amd64 "/home/**/Vides/"`
+
+> Or use docker-compose: https://hub.docker.com/repository/docker/yingshaoxo/local_show
+
+> You could even get the raw html file served under http://0.0.0.0:5012/raw or http://0.0.0.0:5012/html
 
 ___
 

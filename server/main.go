@@ -131,6 +131,8 @@ func main() {
 
 	// Serve target files
 	router.StaticFS("/media", http.Dir(MEDIA_PATH))
+	router.StaticFS("/raw", http.Dir(MEDIA_PATH))
+	router.StaticFS("/html", http.Dir(MEDIA_PATH))
 
 	// Setup route group for the API
 	api := router.Group("/api/")
