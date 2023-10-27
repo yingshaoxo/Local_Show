@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"io/fs"
 
 	"fmt"
@@ -23,6 +24,7 @@ import (
 )
 
 // content holds our static web server content.
+//
 //go:embed ui/*
 var ui_storage embed.FS
 
@@ -83,6 +85,20 @@ func main() {
 	var MEDIA_PATH = dir //"/media"
 	if len(os.Args) >= 2 {
 		MEDIA_PATH = os.Args[1]
+		if path_info, err := os.Stat(MEDIA_PATH); os.IsNotExist(err) {
+			err := errors.New(fmt.Sprintf("The folder you gave is not exists: %s", MEDIA_PATH))
+			panic(err)
+		} else {
+			if !path_info.IsDir() {
+				err := errors.New(fmt.Sprintf("The path you gave is not directory: %s", MEDIA_PATH))
+				panic(err)
+			} else {
+				err := os.Chdir(MEDIA_PATH)
+				if err != nil {
+					panic(err)
+				}
+			}
+		}
 	}
 
 	// ping
