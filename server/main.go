@@ -182,5 +182,5 @@ func main() {
 	}()
 
 	// Start and run the server
-	router.Run(":" + port)
+	router.Run("0.0.0.0:" + port)
 }
