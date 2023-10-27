@@ -3,7 +3,7 @@ import React, { LegacyRef, Ref } from 'react';
 import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import { DialogActions, DialogContent } from '@mui/material';
+import { DialogActions, DialogContent, DialogContentText } from '@mui/material';
 
 import ReactPlayer from 'react-player'
 
@@ -43,6 +43,10 @@ class MyVideoPlayer extends React.Component<{target_url:string}, {show: boolean}
 class ResponsiveDialog extends React.Component<any, any> {
     constructor(props: any) {
         super(props)
+
+        this.state = {
+            copy_popup_open: false
+        };
     }
 
     get_target_url = () => {
@@ -84,6 +88,27 @@ class ResponsiveDialog extends React.Component<any, any> {
         return (
             <div>
                 <Dialog
+                    open={this.state.copy_popup_open}
+                    onClose={ () => {this.setState({copy_popup_open: false})} }
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        The URL
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            {this.get_target_url()}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={() => {this.setState({copy_popup_open: false})}}>
+                            OK
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
                     fullScreen={false}
                     maxWidth={"lg"}
                     open={this.props.parentState.keep_popup_open}
@@ -106,7 +131,7 @@ class ResponsiveDialog extends React.Component<any, any> {
                             wordWrap: 'break-word',
                         }}
                     >
-                        {this.props.parentState.selected_file_name}
+                        <a href={this.get_target_url()} target="_blank">{this.props.parentState.selected_file_name}</a>
                     </DialogTitle>
                     <DialogContent
                         style={{
@@ -131,6 +156,22 @@ class ResponsiveDialog extends React.Component<any, any> {
                             color="primary"
                         >
                             Download
+                        </Button>
+                        <Button
+                            onClick={async () => {
+                                this.setState({copy_popup_open: true})
+
+                                let the_text = this.get_target_url()
+                                console.log(the_text)
+                                if ("clipboard" in navigator) {
+                                    await navigator.clipboard.writeText(the_text);
+                                } else {
+                                    document.execCommand("copy", true, the_text);
+                                }
+                            }}
+                            color="primary"
+                        >
+                            Copy URL
                         </Button>
                         <Button
                             onClick={() => {

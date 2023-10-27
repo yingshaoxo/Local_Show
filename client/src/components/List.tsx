@@ -71,7 +71,7 @@ class NestedList extends React.Component<MyPropertys, MyState> {
             response => response.json()
         )
         .then(result => {
-            console.log(result)
+            //console.log(result)
             this.setState(state => ({
                 info: result,
             }))
@@ -94,7 +94,7 @@ class NestedList extends React.Component<MyPropertys, MyState> {
             response => response.json()
         )
         .then(result => {
-            console.log(result)
+            //console.log(result)
             this.setState(state => ({
                 files: result,
             }))
@@ -117,7 +117,7 @@ class NestedList extends React.Component<MyPropertys, MyState> {
             response => response.json()
         )
         .then(result => {
-            console.log(result)
+            //console.log(result)
         })
         //.catch(error => console.log(error));
     }
@@ -169,7 +169,7 @@ class NestedList extends React.Component<MyPropertys, MyState> {
         await this.function_get_files();
 
         var files = this.state.files
-        console.log(Object.keys(files).length)
+        //console.log(Object.keys(files).length)
         var new_dict = new Map()
         Object.keys(files).forEach(function(key) {
             var value = files[key]
@@ -197,8 +197,8 @@ class NestedList extends React.Component<MyPropertys, MyState> {
             files: obj
         }))
 
-        console.log(obj)
-        console.log(Object.keys(obj).length)
+        //console.log(obj)
+        //console.log(Object.keys(obj).length)
     }
 
     render() {
