@@ -12,7 +12,7 @@ ___
 ___
 
 #### Usage:
-1. Download the binary file: https://github.com/yingshaoxo/Local_Show/releases/tag/0.6
+1. Download the binary file: https://github.com/yingshaoxo/Local_Show/releases/tag/0.7
 2. Put it at the folder where your media exists
 3. Run it!
 
