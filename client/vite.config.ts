@@ -19,7 +19,10 @@ export default defineConfig({
     // }
   ),
   legacy({
-    targets: ['defaults', 'not IE 11'],
+    // for ie11
+    targets: ["ie >= 6"],
+    additionalLegacyPolyfills: ["regenerator-runtime/runtime"],
+    polyfills: ["es.array.iterator"],
   }),
 ],
 })
