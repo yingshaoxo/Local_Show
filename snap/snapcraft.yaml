@@ -1,0 +1,30 @@
+# I think snapcraft is trying to do something android or google play store did
+# They let you specify app permissions first, then cut permission one by one. I mean they will only allow you to use graphs in the end.
+# If you use other permissions other than audio and graphs, they will not publish your application
+# And in the end, they will even remove some functions from linux kernel level
+# If you know google play app development, you would know what I am trying to say
+
+name: localshow
+version: '0.7'
+summary: It will help you serve your media files over network.
+description: It serves your media file at a website in a LAN, so you can visit them at other devices.
+
+confinement: strict
+base: core19
+
+architectures:
+- build-on: amd64
+
+parts:
+  localshow:
+    plugin: go
+    source: ./server
+
+apps:
+  localshow:
+    command: $SNAP/bin/LocalShow
+    plugs:
+      - home
+      - network-bind
+      - network
+      - process-control
