@@ -64,7 +64,7 @@ ___
 
 #### Think about react.js
 
-##### You could use `@vue/reactivity` to set up a global store to save every variable and function you need to use cross your whole projct (react.js global variable and functions)
+##### You could use `@vue/reactivity` to set up a global store to save every variable and function you need cross your whole projct (how to set up a react.js global variable and functions dict)
 ```ts
 #store.ts
 
