@@ -61,3 +61,44 @@ ___
 
 * https://medium.com/@synapticsynergy/serving-a-react-app-with-golang-using-gin-c6402ee64a4b
 * https://fabianlee.org/2018/05/10/docker-packaging-a-golang-version-of-hello-world-in-a-container/
+
+#### Think about react.js
+
+##### You could use `@vue/reactivity` to set up a global store to save every variable and function you need to use cross your whole projct (react.js global variable and functions)
+```ts
+#store.ts
+
+import { reactive } from '@vue/reactivity'
+
+export const dict = reactive({
+    hi: "yingshaoxo"
+})
+
+export const functions = reactive({
+})
+```
+
+```tsx
+import { useState, Component } from 'react'
+import { dict } from "./store"
+
+class App extends Component {
+  render() {
+      return (
+        <div className="App">
+          <div>{ dict.hi }</div>
+
+          <button onClick={() => {
+            dict.hi = 'is nice';
+            this.setState({});
+          }
+          }>click me to change</button>
+        </div>
+      )
+  }
+}
+
+export default App
+```
+
+> It will not support IE11 because they do not have Proxy API.
