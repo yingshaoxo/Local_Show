@@ -64,11 +64,12 @@ ___
 
 #### Think about react.js
 
-##### You could use `@vue/reactivity` to set up a global store to save every variable and function you need cross your whole projct (how to set up a react.js global variable and functions dict)
+##### You could use `@vue/reactivity` or `vue(2.7)` to set up a global store to save every variable and function you need cross your whole projct (how to set up a react.js global variable and functions dict)
 ```ts
 #store.ts
 
 import { reactive } from '@vue/reactivity'
+//import { reactive } from 'vue'; //import from vue2.7 to support IE11
 
 export const dict = reactive({
     hi: "yingshaoxo"
@@ -101,4 +102,4 @@ class App extends Component {
 export default App
 ```
 
-> It will not support IE11 because they do not have Proxy API.
+> It will not support IE11 because they do not have Proxy API. If you want to let ie to support vue reactive function, you have to import and use vue2.7 version of reactive function.
