@@ -3,6 +3,8 @@
 
 > Aim to use reactjs to generate html files, then use golang to serve it.
 
+> Alternatives: `python3 -m http.server 8080 --bind 0.0.0.0 --directory /path/to/directory`
+
 ___
 
 #### How it looks like
